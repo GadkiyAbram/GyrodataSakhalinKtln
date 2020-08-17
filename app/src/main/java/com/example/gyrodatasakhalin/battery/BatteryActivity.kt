@@ -73,7 +73,7 @@ class BatteryActivity : AppCompatActivity() {
                     batteries.add(batteryItem)
                     Log.i("BATTERY", batteryItem.serialOne)
                 }
-                batteryRecyclerView.adapter = BatteryAdapter(batteries)
+                batteryRecyclerView.adapter = BatteryAdapter(batteries, applicationContext)
                 batteryRecyclerView.layoutManager = LinearLayoutManager(this)
                 batteryRecyclerView.setHasFixedSize(true)
             }

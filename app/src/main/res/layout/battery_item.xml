@@ -9,28 +9,35 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/battery_view"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_battery" />
+        <TextView
+            android:id="@+id/tvCondition"
+            android:layout_width="36dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_condition"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:text="N/U"/>
 
         <TextView
+            android:paddingLeft="15dp"
             android:id="@+id/serial_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/battery_view"
+            android:layout_toEndOf="@id/tvCondition"
             android:text="Serial One"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
+            android:paddingLeft="15dp"
             android:id="@+id/battery_ccd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/serial_one"
-            android:layout_toEndOf="@id/battery_view"
+            android:layout_toEndOf="@id/tvCondition"
             android:text="Battery CCD" />
 
     </RelativeLayout>
