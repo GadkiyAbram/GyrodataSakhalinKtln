@@ -21,8 +21,8 @@ class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Contex
 
     class BatteryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val batteryCondition: TextView = itemView.tvCondition
-        val serailOne: TextView = itemView.serial_one
-        val batteryCCD: TextView = itemView.battery_ccd
+        val serialOne: TextView = itemView.serial_one
+        val batteryCCD: TextView = itemView.battery_arrived
     }
 
     private fun getContext() : Context {
@@ -43,7 +43,7 @@ class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Contex
 
     override fun onBindViewHolder(holder: BatteryViewHolder, position: Int) {
         val currentBattery = batteryList[position]
-        holder.serailOne.text = currentBattery.serialOne
+        holder.serialOne.text = currentBattery.serialOne
         holder.batteryCCD.text = currentBattery.CCD
         holder.batteryCondition.text = getCondition(currentBattery.batteryCondition)
         val circleColor : GradientDrawable = holder.batteryCondition.background.current as GradientDrawable

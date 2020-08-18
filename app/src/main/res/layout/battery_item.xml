@@ -33,7 +33,7 @@
 
         <TextView
             android:paddingLeft="15dp"
-            android:id="@+id/battery_ccd"
+            android:id="@+id/battery_arrived"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/serial_one"

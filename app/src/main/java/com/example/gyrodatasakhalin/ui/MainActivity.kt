@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             token = receivedToken.toString()
             text_view.text = token
             API_KEY = token
-            Log.i("BATTERY", API_KEY)
+            Log.i("MainActivity", API_KEY)
             getBatteries(API_KEY)
         })
         return token
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     private fun getBatteries(token: String){
         val responseLiveData : LiveData<Response<Battery>> = liveData {
             val response = retService.getCustomBatteries("", "")
-            Log.i("BATTERY", response.toString())
+//            Log.i("BATTERY", response.toString())
             emit(response)
         }
 
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             if (batteryList != null){
                 while (batteryList.hasNext()){
                     val batteryItem = batteryList.next()
-                    Log.i("BATTERY", batteryItem.serialOne)
+                    Log.i("MainActivity", batteryItem.serialOne)
                 }
             }
         })
