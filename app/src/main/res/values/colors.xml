@@ -15,5 +15,17 @@
 <!--    <color name="usedBattColor">#ff0000</color>-->
     <!--Default color for the battery, that condition is unknown-->
     <color name="defaultColor">#FFFF00</color>
+    <!--Colors for FAB-->
+    <color name="colorTool">#C1C1C1</color>
+    <color name="colorJob">#4747E5</color>
+    <color name="colorGDTA">#FA1414</color>
+    <color name="colorBattery">#47E590</color>
+    <!--Swipe Button Background-->
+    <color name="swipeBtnBackground">#FFFFFF</color>
+
+    <color name="swipeButton">#FFFFFF</color>
+
+    <!--  Color Theme  -->
+    <color name="colorThemeMain">#f75348</color>
 
 </resources>

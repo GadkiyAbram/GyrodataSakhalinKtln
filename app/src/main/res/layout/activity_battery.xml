@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,24 +7,77 @@
     android:orientation="vertical"
     tools:context=".battery.BatteryActivity">
 
+    <include layout="@layout/progress_bar"/>
+
     <LinearLayout
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:background="@color/swipeButton"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:buttonTint="@color/colorTool"
+                    android:checked="true"
+                    android:text="Serial 1"
+                    android:layout_weight="1"
+                    android:id="@+id/rbSerialButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:buttonTint="@color/colorTool"
+                    android:backgroundTint="@color/swipeBtnBackground"
+                    android:text="Status"
+                    android:layout_weight="1"
+                    android:id="@+id/rbStatusButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:buttonTint="@color/colorTool"
+                    android:text="CCD"
+                    android:layout_weight="1"
+                    android:id="@+id/rbCCDButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:buttonTint="@color/colorTool"
+                    android:text="Invoice"
+                    android:layout_weight="1"
+                    android:id="@+id/rbInvoiceButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
         <EditText
+            android:backgroundTint="@color/colorGDTA"
             android:id="@+id/edSearch"
+            android:hint="Your sign..."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/batteryRecyclerView"
+            android:padding="4dp"
+            android:clipToPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/battery_item"/>
+
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/batteryRecyclerView"
-        android:padding="4dp"
-        android:clipToPadding="false"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/battery_item"/>
-
-
-</LinearLayout>
+</RelativeLayout>

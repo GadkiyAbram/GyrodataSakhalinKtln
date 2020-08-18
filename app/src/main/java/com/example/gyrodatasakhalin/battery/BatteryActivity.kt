@@ -1,11 +1,14 @@
 package com.example.gyrodatasakhalin.battery
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
@@ -17,6 +20,7 @@ import com.example.gyrodatasakhalin.auth.AuthModel
 import com.example.gyrodatasakhalin.auth.AuthService
 import kotlinx.android.synthetic.main.activity_battery.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.progress_bar.*
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
@@ -40,9 +44,17 @@ class BatteryActivity : AppCompatActivity() {
 
         edSearch.addTextChangedListener(object : TextWatcher{
 
-            override fun afterTextChanged(p0: Editable?) {
+            var where: String = ""
+
+            override fun afterTextChanged(searchQuery: Editable?) {
+
+                if (rbSerialButton.isChecked){where = "Serial"}
+                if (rbStatusButton.isChecked){where = "Status"}
+                if (rbCCDButton.isChecked){where = "CCD"}
+                if (rbInvoiceButton.isChecked){where = "Invoice"}
+
                 Handler().postDelayed({
-                    search(p0)
+                    search(searchQuery, where)
                 }, 1500)
             }
 
@@ -50,9 +62,9 @@ class BatteryActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            private fun search(editable: Editable?){
+            private fun search(editable: Editable?, searchWhere: String){
                 var searchWhat : String = edSearch.text.toString()
-                getBatteries(API_KEY, editable.toString(), "")
+                getBatteries(API_KEY, editable.toString(), searchWhere)
             }
 
         })
@@ -80,8 +92,12 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     private fun getBatteries(token: String, what: String, where: String){
+
+        pbWaiting.bringToFront()
+        pbWaiting.visibility = View.VISIBLE
+
         val responseLiveData : LiveData<Response<Battery>> = liveData {
-            val response = retService.getCustomBatteries(what, "Serial")
+            val response = retService.getCustomBatteries(what, where)
             emit(response)
         }
 
@@ -89,6 +105,11 @@ class BatteryActivity : AppCompatActivity() {
             val batteryList = it.body()?.listIterator()
             var batteries = ArrayList<BatteryItem>()
             if (batteryList != null){
+
+                if (pbWaiting != null && pbWaiting.isShown){
+                    pbWaiting.visibility = View.GONE
+                }
+
                 while (batteryList.hasNext()){
                     val batteryItem = batteryList.next()
                     batteries.add(batteryItem)
