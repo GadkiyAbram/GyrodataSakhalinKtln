@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Gyrodata Sakhalin</string>
+    <string name="login_main">LOG IN</string>
 </resources>

@@ -40,7 +40,8 @@ class BatteryActivity : AppCompatActivity() {
         authService = RetrofitInstance.getRetrofitInstance()
             .create(AuthService::class.java)
 
-        getToken()
+//        getToken()
+        getBatteries(API_KEY, "", "")
 
         edSearch.addTextChangedListener(object : TextWatcher{
 
@@ -62,9 +63,9 @@ class BatteryActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            private fun search(editable: Editable?, searchWhere: String){
-                var searchWhat : String = edSearch.text.toString()
-                getBatteries(API_KEY, editable.toString(), searchWhere)
+            private fun search(searchWhat: Editable?, searchWhere: String){
+                var searchWhat : String = searchWhat.toString()
+                getBatteries(API_KEY, searchWhat, searchWhere)
             }
 
         })
