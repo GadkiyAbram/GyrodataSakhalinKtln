@@ -1,12 +1,14 @@
-package com.example.gyrodatasakhalin.battery
+package com.example.gyrodatasakhalin.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
@@ -14,36 +16,65 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gyrodatasakhalin.API_KEY
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
-import com.example.gyrodatasakhalin.auth.AuthModel
-import com.example.gyrodatasakhalin.auth.AuthService
-import com.example.gyrodatasakhalin.job.Job
-import com.example.gyrodatasakhalin.job.JobService
+import com.example.gyrodatasakhalin.battery.Battery
+import com.example.gyrodatasakhalin.battery.BatteryAdapter
+import com.example.gyrodatasakhalin.battery.BatteryItem
+import com.example.gyrodatasakhalin.battery.BatteryService
 import kotlinx.android.synthetic.main.activity_battery.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import retrofit2.Response
-import kotlin.collections.ArrayList
 
-class BatteryActivity : AppCompatActivity() {
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
-//    TODO - could be unnecessary
+private lateinit var retService: BatteryService
 
-    private lateinit var authService: AuthService
-    private lateinit var retService: BatteryService
+/**
+ * A simple [Fragment] subclass.
+ * Use the [BatteryFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class BatteryFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_battery)
+
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+
+        return inflater.inflate(R.layout.fragment_battery, container, false)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         retService = RetrofitInstance.getRetrofitInstance()
             .create(BatteryService::class.java)
 
-        authService = RetrofitInstance.getRetrofitInstance()
-            .create(AuthService::class.java)
-
-//        getToken()
         getBatteries(API_KEY, "", "")
 
-        edSearchBattery.addTextChangedListener(object : TextWatcher{
+        searchBatteryByKey(edSearchBattery)
+
+
+    }
+
+    private fun searchBatteryByKey(search: EditText){
+        search.addTextChangedListener(object : TextWatcher {
 
             var where: String = ""
 
@@ -71,27 +102,6 @@ class BatteryActivity : AppCompatActivity() {
         })
     }
 
-    private fun getToken() : String{
-        var token = ""
-
-        val user = "admin@admin.com"
-        val password = "12341234"
-        val userToAuth = AuthModel(user, password)
-        val postResponse : LiveData<Response<String>> = liveData {
-            val response = authService.getToken(userToAuth)
-            emit(response)
-        }
-
-        postResponse.observe(this, Observer {
-            val receivedToken = it.body()
-            token = receivedToken.toString()
-            API_KEY = token
-            Log.i("BATTERY", API_KEY)
-            getBatteries(API_KEY, "", "")
-        })
-        return token
-    }
-
     private fun getBatteries(token: String, what: String, where: String){
 
         pbWaiting.bringToFront()
@@ -115,9 +125,9 @@ class BatteryActivity : AppCompatActivity() {
                     val batteryItem = batteryList.next()
                     batteries.add(batteryItem)
                 }
-                batteryRecyclerView.adapter = BatteryAdapter(batteries, applicationContext)
+                batteryRecyclerView.adapter = BatteryAdapter(batteries, context!!.applicationContext)
                 (batteryRecyclerView.adapter as BatteryAdapter).notifyDataSetChanged()
-                batteryRecyclerView.layoutManager = LinearLayoutManager(this)
+                batteryRecyclerView.layoutManager = LinearLayoutManager(context!!.applicationContext)
                 batteryRecyclerView.setHasFixedSize(true)
             }
         })

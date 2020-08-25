@@ -27,5 +27,20 @@
 
     <!--  Color Theme  -->
     <color name="colorThemeMain">#f75348</color>
+    <!--  Main Activity Screen  -->
+    <color name="layoutBack">#40DCDCDC</color>
+    <color name="layoutInner">#FFFFFF</color>
+    <!--Background color of the batteryitem-->
+    <color name="backGroundColor">#ECEFF1</color>
+    <!-- Text color for the primary location of the earthquake in the list item -->
+    <color name="textColorSerialNumber">#2B3D4D</color>
+    <!-- Text color for the details of the earthquake in the list item -->
+    <color name="textColorBoxNumber">#B4BAC0</color>
+    <!--  Client colors  -->
+    <!--SLB-->
+    <color name="slbClient">#1E90FF</color>>
+    <!--HAL-->
+    <color name="halClient">#FF4500</color>
+
 
 </resources>

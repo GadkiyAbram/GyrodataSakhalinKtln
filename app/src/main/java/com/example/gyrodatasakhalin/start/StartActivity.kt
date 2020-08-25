@@ -14,6 +14,7 @@ import com.example.gyrodatasakhalin.RetrofitInstance
 import com.example.gyrodatasakhalin.auth.AuthModel
 import com.example.gyrodatasakhalin.auth.AuthService
 import com.example.gyrodatasakhalin.battery.BatteryActivity
+import com.example.gyrodatasakhalin.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_start.*
 import retrofit2.Response
 
@@ -55,7 +56,7 @@ class StartActivity : AppCompatActivity() {
                 token = receivedToken.toString()
                 API_KEY = token
                 Log.i("BATTERY", API_KEY)
-                val intent = Intent(this, BatteryActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 if (pbHorizontal.visibility == View.VISIBLE){
                     pbHorizontal.visibility = View.GONE
                     startActivity(intent)

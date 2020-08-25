@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Gyrodata Sakhalin</string>
     <string name="login_main">LOG IN</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="dashboard_fragment">Dashboard Fragment</string>
+    <string name="battery_fragment">Battery Fragment</string>
+    <string name="job_fragment">Job Fragment</string>
+    <string name="tool_fragment">Tool Fragment</string>
 </resources>
