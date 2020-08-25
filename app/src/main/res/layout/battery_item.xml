@@ -4,42 +4,52 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/mainBatteryLayout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvCondition"
-            android:layout_width="36dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/ic_condition"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:textColor="@android:color/black"
-            android:textSize="12sp"
-            android:text="N/U"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
 
-        <TextView
-            android:paddingLeft="15dp"
-            android:id="@+id/serial_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tvCondition"
-            android:text="Serial One"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvCondition"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_condition"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:text="N/U"/>
 
-        <TextView
-            android:paddingLeft="15dp"
-            android:id="@+id/battery_arrived"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/serial_one"
-            android:layout_toEndOf="@id/tvCondition"
-            android:text="Battery CCD" />
+            <TextView
+                android:paddingLeft="15dp"
+                android:id="@+id/serial_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tvCondition"
+                android:text="Serial One"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    </RelativeLayout>
+            <TextView
+                android:paddingLeft="15dp"
+                android:id="@+id/battery_arrived"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/serial_one"
+                android:layout_toEndOf="@id/tvCondition"
+                android:text="Battery CCD" />
+
+        </LinearLayout>
+
+        <include layout="@layout/battery_row"></include>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

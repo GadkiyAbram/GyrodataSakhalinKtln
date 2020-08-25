@@ -6,11 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gyrodatasakhalin.R
 import kotlinx.android.synthetic.main.battery_item.view.*
+import kotlinx.android.synthetic.main.battery_row.view.*
 
 class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Context) : RecyclerView.Adapter<BatteryAdapter.BatteryViewHolder>() {
 
@@ -20,6 +22,16 @@ class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Contex
         val batteryCondition: TextView = itemView.tvCondition
         val serialOne: TextView = itemView.serial_one
         val batteryCCD: TextView = itemView.battery_arrived
+        val mainBatteryLayout: LinearLayout = itemView.mainBatteryLayout
+        val expandableBatteryLayout: LinearLayout = itemView.expandableBatteryLayout
+        //Precise Battery Data
+        val batterySerialTwo: TextView = itemView.findViewById(R.id.tvSerNum2)
+        val batterySerialThr: TextView = itemView.findViewById(R.id.tvSerNum3)
+        val batteryInvoice: TextView = itemView.findViewById(R.id.tvBatteryInvoice)
+        val batteryCCDs: TextView = itemView.findViewById(R.id.tvBatteryCCD)
+        val batteryManufactured: TextView = itemView.findViewById(R.id.tvManuf)
+        val batteryLocation: TextView = itemView.findViewById(R.id.tvBatteryLocation)
+        val batteryComments: TextView = itemView.findViewById(R.id.tvBatteryComments)
     }
 
     private fun getContext() : Context {
@@ -40,6 +52,7 @@ class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Contex
 
     override fun onBindViewHolder(holder: BatteryViewHolder, position: Int) {
         val currentBattery = batteryList[position]
+        // Preview Battery Data
         holder.serialOne.text = currentBattery.serialOne
         holder.batteryCCD.text = currentBattery.CCD
         holder.batteryCondition.text = getCondition(currentBattery.batteryCondition)
@@ -47,6 +60,25 @@ class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Contex
         val color : Int = getConditionColor(currentBattery.batteryCondition)
         Log.i("COLOR", color.toString())
         circleColor.setColor(color)
+
+        // Precise Battery Data
+        holder.batterySerialTwo.text = currentBattery.serialTwo
+        holder.batterySerialThr.text = currentBattery.serialThr
+        holder.batteryInvoice.text = currentBattery.invoice
+        //TODO - refactor CCDs
+        holder.batteryCCDs.text = currentBattery.CCD
+        holder.batteryManufactured.text = currentBattery.arrived
+        holder.batteryLocation.text = currentBattery.batteryStatus
+        holder.batteryComments.text = currentBattery.comment
+
+        val isExpandable: Boolean = batteryList[position].expandable
+        holder.expandableBatteryLayout.visibility = if (isExpandable) View.VISIBLE else View.GONE
+
+        holder.mainBatteryLayout.setOnClickListener {
+            var currentJob = batteryList[position]
+            currentJob.expandable = !currentJob.expandable
+            notifyItemChanged(position)
+        }
 
     }
 

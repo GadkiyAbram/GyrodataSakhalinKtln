@@ -31,5 +31,7 @@ data class BatteryItem(
     @SerializedName("SerialTwo")
     val serialTwo: String,
     @SerializedName("Updated_at")
-    val updatedAt: String
+    val updatedAt: String,
+
+    var expandable: Boolean = false
 )
