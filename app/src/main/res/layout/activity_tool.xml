@@ -28,18 +28,18 @@
                 <RadioButton
                     android:buttonTint="@color/colorTool"
                     android:checked="true"
-                    android:text="Serial 1"
+                    android:text="Item"
                     android:layout_weight="1"
-                    android:id="@+id/rbSerialButton"
+                    android:id="@+id/radioToolItemButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <RadioButton
                     android:buttonTint="@color/colorTool"
                     android:backgroundTint="@color/swipeBtnBackground"
-                    android:text="Status"
+                    android:text="Asset"
                     android:layout_weight="1"
-                    android:id="@+id/rbStatusButton"
+                    android:id="@+id/radioToolAssetButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -47,7 +47,7 @@
                     android:buttonTint="@color/colorTool"
                     android:text="CCD"
                     android:layout_weight="1"
-                    android:id="@+id/rbCCDButton"
+                    android:id="@+id/radioToolCCDButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -55,7 +55,7 @@
                     android:buttonTint="@color/colorTool"
                     android:text="Invoice"
                     android:layout_weight="1"
-                    android:id="@+id/rbInvoiceButton"
+                    android:id="@+id/radioToolInvoiceButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </RadioGroup>
@@ -64,18 +64,18 @@
 
         <EditText
             android:backgroundTint="@color/colorGDTA"
-            android:id="@+id/edSearchBattery"
+            android:id="@+id/edSearchTool"
             android:hint="Your sign..."
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/batteryRecyclerView"
+            android:id="@+id/toolRecyclerView"
             android:padding="4dp"
             android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/battery_item"/>
+            tools:listitem="@layout/tool_item"/>
 
     </LinearLayout>
 

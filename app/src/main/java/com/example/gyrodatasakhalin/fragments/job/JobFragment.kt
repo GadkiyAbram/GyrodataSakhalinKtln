@@ -1,6 +1,5 @@
-package com.example.gyrodatasakhalin.fragments
+package com.example.gyrodatasakhalin.fragments.job
 
-import android.app.job.JobService
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -20,7 +19,6 @@ import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
 import com.example.gyrodatasakhalin.job.JobAdapter
 import com.example.gyrodatasakhalin.job.JobItem
-import kotlinx.android.synthetic.main.activity_battery.*
 import kotlinx.android.synthetic.main.activity_job.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import retrofit2.Response

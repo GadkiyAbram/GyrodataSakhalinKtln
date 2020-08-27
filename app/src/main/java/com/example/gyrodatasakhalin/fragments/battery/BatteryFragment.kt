@@ -1,4 +1,4 @@
-package com.example.gyrodatasakhalin.fragments
+package com.example.gyrodatasakhalin.fragments.battery
 
 import android.os.Bundle
 import android.os.Handler
@@ -65,6 +65,8 @@ class BatteryFragment : Fragment() {
 
         retService = RetrofitInstance.getRetrofitInstance()
             .create(BatteryService::class.java)
+
+        // Add swipe
 
         getBatteries(API_KEY, "", "")
 

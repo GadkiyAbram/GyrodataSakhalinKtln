@@ -1,10 +1,12 @@
 package com.example.gyrodatasakhalin
 
+import android.widget.Toast
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.SocketTimeoutException
 
 var API_KEY = ""
 

@@ -3,11 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ToolFragment">
+    tools:context=".fragments.tool.ToolFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/tool_fragment" />
+    <include layout="@layout/activity_tool"/>
 
 </FrameLayout>
