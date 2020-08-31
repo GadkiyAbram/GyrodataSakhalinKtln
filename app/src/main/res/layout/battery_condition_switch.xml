@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="end"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ToggleButton
+        android:drawableStart="@drawable/condition_selector"
+        android:textOff="USED BATTERY"
+        android:textOn="NEW BATTERY"
+        android:gravity="center|end"
+        android:backgroundTint="@color/swipeBtnBackground"
+        android:id="@+id/toggleConditionSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

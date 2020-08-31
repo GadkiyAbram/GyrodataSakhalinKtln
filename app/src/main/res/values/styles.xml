@@ -7,4 +7,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="conditionSwitch">
+        <item name="android:colorControlActivated">@android:color/holo_green_dark</item>
+    </style>
+
 </resources>

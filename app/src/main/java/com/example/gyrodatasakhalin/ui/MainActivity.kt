@@ -22,6 +22,7 @@ import com.example.gyrodatasakhalin.fragments.tool.ToolFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fab_layout.*
+import kotlinx.coroutines.Job
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,9 +60,9 @@ class MainActivity : AppCompatActivity() {
 
         val fbAddMain: FloatingActionButton = findViewById(R.id.fbAddMain)
 
-        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        setupBottomNavMenu(navController)
-        setupActionBar(navController)
+//        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+//        setupBottomNavMenu(navController)
+//        setupActionBar(navController)
 
         fbAddMain.setOnClickListener {
             onAddMainButtonClicked()
@@ -84,6 +85,31 @@ class MainActivity : AppCompatActivity() {
         fbAddJobButton.setOnClickListener {
             Toast.makeText(this, "Add Job Button clicked", Toast.LENGTH_SHORT).show()
         }
+
+        val dashboardFragment = DashboardFragment()
+        val toolFragment = ToolFragment()
+        val batteryFragment = BatteryFragment()
+        val jobFragment = JobFragment()
+
+        makeCurrentFragment(dashboardFragment)
+
+        bottom_nav.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.destination_dashboard -> makeCurrentFragment(dashboardFragment)
+                R.id.destination_tool -> makeCurrentFragment(toolFragment)
+                R.id.destination_battery -> makeCurrentFragment(batteryFragment)
+                R.id.destination_job -> makeCurrentFragment(jobFragment)
+            }
+            true
+        }
+    }
+
+    private fun makeCurrentFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+
+            replace(R.id.fragment_container, fragment)
+                .commit()
+        }
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
@@ -97,12 +123,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-            val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-            val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
-            Log.i("NAVIGATED: ", navigated.toString())
-            return navigated || super.onOptionsItemSelected(item)
-        }
+//        override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+//            val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+//            val navigated = NavigationUI.onNavDestinationSelected(item!!, navController)
+//            Log.i("NAVIGATED: ", navigated.toString())
+//            return navigated || super.onOptionsItemSelected(item)
+//        }
 
         private fun onAddMainButtonClicked() {
             setVisibility(clicked)

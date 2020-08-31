@@ -34,4 +34,5 @@ data class BatteryItem(
     val updatedAt: String,
 
     var expandable: Boolean = false
+
 )

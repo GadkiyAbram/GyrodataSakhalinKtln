@@ -1,12 +1,17 @@
 package com.example.gyrodatasakhalin
 
-import android.widget.Toast
+import com.example.gyrodatasakhalin.utils.AppPreferences
 import com.google.gson.GsonBuilder
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
+import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.SocketTimeoutException
+import java.util.concurrent.TimeUnit
 
 var API_KEY = ""
 
@@ -21,7 +26,11 @@ class RetrofitInstance {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
 
-        val okHttpClient = OkHttpClient.Builder().addInterceptor{ chain ->
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor{ chain ->
             val original = chain.request()
 
             // Request customization: add request headers

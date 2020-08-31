@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.battery.AddBatteryFragment">
 
-    <include layout="@layout/job_row"/>
+    <include layout="@layout/activity_add_battery"/>
 
 </FrameLayout>

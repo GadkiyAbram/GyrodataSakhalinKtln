@@ -23,6 +23,10 @@
     <!--Swipe Button Background-->
     <color name="swipeBtnBackground">#FFFFFF</color>
 
+    <!--Background colors fro Job Precise Details-->
+    <color name="backColorJobPrecise">#40DCDCDC</color>
+    <color name="backColorLayouts">#F8F8FF</color>
+
     <color name="swipeButton">#FFFFFF</color>
 
     <!--  Color Theme  -->
@@ -41,6 +45,14 @@
     <color name="slbClient">#1E90FF</color>>
     <!--HAL-->
     <color name="halClient">#FF4500</color>
-
-
+    <!--  Colors for Alert Dialog  -->
+    <color name="colorDialogPrimary">#008577</color>
+    <color name="colorDialogPrimaryDark">#005748</color>
+    <color name="colorDialogPrimaryAccent">#D81860</color>
+    <color name="colorDialogWhile">#FFFFFF</color>
+    <color name="colorDialogSuccess">#4BB543</color>
+    <color name="colorDialogWarning">#FFCC00</color>
+    <color name="colorDialogNeutral">#434343</color>
+    <color name="colorDialogError">#CC0000</color>
+    <color name="colorDialogTextPrimary">#212121</color>
 </resources>
