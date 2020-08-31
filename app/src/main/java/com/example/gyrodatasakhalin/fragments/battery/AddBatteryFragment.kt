@@ -146,12 +146,20 @@ class AddBatteryFragment : Fragment() {
             errorsArray.put("Serial1", "Invalid Serial One")
         }
 
-        if (!batteryValidation.checkInvoice(edBatteryInvoice.text.toString())){
-            errorsArray.put("Invoice", "Invalid Invoice")
+        if (edBatteryBox.text.toString() == "0"){
+            errorsArray.put("Box", "Box Number couldn't be 0")
         }
 
-        if (!batteryValidation.checkCcd(edBatteryCCD.text.toString())){
-            errorsArray.put("CCD", "Invalid CCD")
+        if (!edBatteryInvoice.text.isEmpty()){
+            if (!batteryValidation.checkInvoice(edBatteryInvoice.text.toString())){
+                errorsArray.put("Invoice", "Invalid Invoice")
+            }
+        }
+
+        if (!edBatteryCCD.text.isEmpty()){
+            if (!batteryValidation.checkCcd(edBatteryCCD.text.toString())){
+                errorsArray.put("CCD", "Invalid CCD")
+            }
         }
 
         if (!errorsArray.isEmpty()){
