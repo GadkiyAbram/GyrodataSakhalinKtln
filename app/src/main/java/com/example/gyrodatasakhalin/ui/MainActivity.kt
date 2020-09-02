@@ -17,7 +17,9 @@ import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.fragments.battery.AddBatteryFragment
 import com.example.gyrodatasakhalin.fragments.battery.BatteryFragment
 import com.example.gyrodatasakhalin.fragments.dashboard.DashboardFragment
+import com.example.gyrodatasakhalin.fragments.job.AddJobFragment
 import com.example.gyrodatasakhalin.fragments.job.JobFragment
+import com.example.gyrodatasakhalin.fragments.tool.AddToolFragment
 import com.example.gyrodatasakhalin.fragments.tool.ToolFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
@@ -69,21 +71,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         fbAddToolButton.setOnClickListener {
-            Toast.makeText(this, "Add Tool Button clicked", Toast.LENGTH_SHORT).show()
+            supportFragmentManager.beginTransaction().apply {
+
+                replace(R.id.fragment_container, AddToolFragment())
+                    .commit()
+            }
         }
-
         fbAddBatteryButton.setOnClickListener {
-//            Toast.makeText(this, "Add Battery Button clicked", Toast.LENGTH_SHORT).show()
-
             supportFragmentManager.beginTransaction().apply {
 
                 replace(R.id.fragment_container, AddBatteryFragment())
                     .commit()
             }
         }
-
         fbAddJobButton.setOnClickListener {
-            Toast.makeText(this, "Add Job Button clicked", Toast.LENGTH_SHORT).show()
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, AddJobFragment())
+                    .commit()
+            }
         }
 
         val dashboardFragment = DashboardFragment()

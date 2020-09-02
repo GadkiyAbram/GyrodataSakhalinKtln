@@ -55,4 +55,6 @@
     <color name="colorDialogNeutral">#434343</color>
     <color name="colorDialogError">#CC0000</color>
     <color name="colorDialogTextPrimary">#212121</color>
+
+    <color name="colorIssuesTint">#FA1414</color>
 </resources>

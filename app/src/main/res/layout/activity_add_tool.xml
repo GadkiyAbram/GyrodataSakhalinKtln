@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusableInTouchMode="true"
+    android:background="@color/backColorJobPrecise"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/progress_bar"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:background="@drawable/edittext_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:padding="7dp"
+                android:textSize="22dp"
+                android:text="New Item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="3dp"
+            android:id="@+id/linLayoutUp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spinnerToolGWD"
+                android:layout_weight="1.5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+            </Spinner>
+
+            <EditText
+                android:hint="G0106H"
+                android:background="@drawable/edittext_shape"
+                android:id="@+id/edItemAsset"
+                android:layout_weight="1"
+                android:padding="7dp"
+                android:textAlignment="center"
+                android:textSize="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/linLayoutForBoth"
+                android:orientation="vertical"
+                android:layout_weight="20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linLayoutLeft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/backColorLayouts"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:minWidth="140dp"
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Arrived:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edAItemArrived"
+                            android:text="11-11-2017"
+                            android:textSize="16dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:minWidth="140dp"
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Invoice:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemInvoice"
+                            android:text="O/11/17"
+                            android:textSize="16dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:minWidth="140dp"
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Custom CD:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemCCD"
+                            android:text="10302020-4934653-333"
+                            android:textSize="16dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:minWidth="140dp"
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Russian:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemNameRussian"
+                            android:hint="Название из CCD"
+                            android:textSize="16dp"
+                            android:layout_weight="4"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:padding="7dp"
+                            android:minWidth="140dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Position in CCD:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemPosition"
+                            android:hint="1"
+                            android:textSize="16dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:padding="7dp"
+                            android:minWidth="140dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Location:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemStatus"
+                            android:hint="SLB Base"
+                            android:textSize="16dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:padding="7dp"
+                            android:minWidth="140dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Box:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <!-- TODO Change to Spinner -->
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemBox"
+                            android:hint="GWD Box"
+                            android:textSize="16dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:padding="7dp"
+                            android:minWidth="140dp"
+                            android:background="@drawable/edittext_shape"
+                            android:text="Container:"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemContainer"
+                            android:hint="GYLS-001"
+                            android:textSize="16dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_margin="5dp"
+                    android:id="@+id/linLayoutRight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/backColorLayouts">
+
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_margin="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:text="Comments:"
+                            android:textSize="16dp"
+                            android:layout_weight="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:padding="7dp"
+                            android:background="@drawable/edittext_shape"
+                            android:id="@+id/edItemComments"
+                            android:text="RU1750"
+                            android:textSize="16dp"
+                            android:layout_weight="4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:minHeight="300dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.github.chrisbanes.photoview.PhotoView
+                        android:id="@+id/imageItemPhoto"
+                        android:minHeight="300dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>
