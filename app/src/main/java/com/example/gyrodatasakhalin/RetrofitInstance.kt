@@ -1,5 +1,6 @@
 package com.example.gyrodatasakhalin
 
+import com.example.gyrodatasakhalin.battery.BatteryItem
 import com.example.gyrodatasakhalin.utils.AppPreferences
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -14,6 +15,7 @@ import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
 var API_KEY = ""
+var BSERIALS = ArrayList<String>()
 
 class RetrofitInstance {
     companion object{

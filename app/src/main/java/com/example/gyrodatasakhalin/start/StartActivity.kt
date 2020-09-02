@@ -18,11 +18,9 @@ import com.example.gyrodatasakhalin.battery.BatteryActivity
 import com.example.gyrodatasakhalin.ui.MainActivity
 import com.example.gyrodatasakhalin.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_start.*
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers.Main
 import retrofit2.Response
 
 class StartActivity : AppCompatActivity() {
@@ -43,19 +41,9 @@ class StartActivity : AppCompatActivity() {
             .create(AuthService::class.java)
 
 
-        val validated = validateToken()
-        Log.i("LOGGING", "from OnCreate ${validated.toString()}")
-
-//        getToken()
         btnLogin.setOnClickListener {
 
-            if (validated){
-                startMainActivity()
-                Log.i("LOGGING", "Starting MainActivity")
-            }else{
-                getToken()
-                Log.i("LOGGING", "Requesting New Token")
-            }
+            startOrGetNewToken()
         }
     }
 
@@ -67,11 +55,11 @@ class StartActivity : AppCompatActivity() {
             val response = authService.testToken(token)
             emit(response)
         }
-        postResponse.observe(this, Observer {
+        postResponse.observe(this@StartActivity, Observer {
             result = it.body()!!
-            Log.i("LOGGING", "From validateToken ${result.toString()}")
+            Log.i("TOKEN", "Token From ValidateToken = ${result}")
         })
-        
+
         return result
     }
 
@@ -79,8 +67,6 @@ class StartActivity : AppCompatActivity() {
 
         pbHorizontal.bringToFront()
         pbHorizontal.visibility = View.VISIBLE
-
-//        var token = ""
 
         val user = etUserLogin.text.toString()
         val password = etUserPassword.text.toString()
@@ -96,7 +82,7 @@ class StartActivity : AppCompatActivity() {
                 token = receivedToken.toString()
                 preferences.setToken(token!!)
                 API_KEY = preferences.getToken().toString()
-                Log.i("API_KEY", API_KEY)
+                Log.i("TOKEN", API_KEY)
                 startMainActivity()
             }
         })
@@ -107,6 +93,29 @@ class StartActivity : AppCompatActivity() {
         if (pbHorizontal.visibility == View.VISIBLE){
             pbHorizontal.visibility = View.GONE
             startActivity(intent)
+        }
+    }
+
+    private fun startOrGetNewToken(){
+        var validated = true
+
+        CoroutineScope(Main).launch {
+            val validating = launch {
+                validated = validateToken()
+                Log.i("TOKEN", "Token = ${validateToken()}")
+            }
+            validating.join()
+
+            val decision = launch {
+                if (validated){
+                    Log.i("TOKEN", "Token = ${validated} Starting MainActivity")
+                startMainActivity()
+                }else{
+                    Log.i("TOKEN", "Token = ${validated} Requesting New Token")
+                getToken()
+                }
+            }
+
         }
     }
 }

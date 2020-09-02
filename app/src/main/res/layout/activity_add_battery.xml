@@ -54,6 +54,7 @@
                 android:minWidth="140dp"
                 android:hint="S1-0331-9999"
                 android:id="@+id/edBatterySerial1"
+                android:inputType="textNoSuggestions"
                 android:background="@drawable/edittext_shape"
                 android:textAlignment="center"
                 android:textSize="18dp"

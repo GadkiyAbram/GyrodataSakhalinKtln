@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,10 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gyrodatasakhalin.API_KEY
+import com.example.gyrodatasakhalin.BSERIALS
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
 import com.example.gyrodatasakhalin.battery.Battery
@@ -22,6 +25,13 @@ import com.example.gyrodatasakhalin.battery.BatteryItem
 import com.example.gyrodatasakhalin.battery.BatteryService
 import kotlinx.android.synthetic.main.activity_battery.*
 import kotlinx.android.synthetic.main.progress_bar.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import okhttp3.internal.notifyAll
+import okhttp3.internal.wait
 import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
@@ -63,6 +73,8 @@ class BatteryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        BSERIALS = ArrayList<String>()
+
         retService = RetrofitInstance.getRetrofitInstance()
             .create(BatteryService::class.java)
 
@@ -71,8 +83,6 @@ class BatteryFragment : Fragment() {
         getBatteries(API_KEY, "", "")
 
         searchBatteryByKey(edSearchBattery)
-
-
     }
 
     private fun searchBatteryByKey(search: EditText){
@@ -109,15 +119,20 @@ class BatteryFragment : Fragment() {
         pbWaiting.bringToFront()
         pbWaiting.visibility = View.VISIBLE
 
+        var batteries = ArrayList<BatteryItem>()
+
         val responseLiveData : LiveData<Response<Battery>> = liveData {
             val response = retService.getCustomBatteries(what, where)
+            Log.i("BATT", "Response: ${response.body()}")
             emit(response)
+
         }
 
-        responseLiveData.observe(this, Observer {
+        responseLiveData.observe(this@BatteryFragment, Observer {
             val batteryList = it.body()?.listIterator()
-            var batteries = ArrayList<BatteryItem>()
+
             if (batteryList != null){
+
 
                 if (pbWaiting != null && pbWaiting.isShown){
                     pbWaiting.visibility = View.GONE
@@ -126,12 +141,19 @@ class BatteryFragment : Fragment() {
                 while (batteryList.hasNext()){
                     val batteryItem = batteryList.next()
                     batteries.add(batteryItem)
+                    BSERIALS.add(batteryItem.serialOne)
                 }
-                batteryRecyclerView.adapter = BatteryAdapter(batteries, context!!.applicationContext)
-                (batteryRecyclerView.adapter as BatteryAdapter).notifyDataSetChanged()
-                batteryRecyclerView.layoutManager = LinearLayoutManager(context!!.applicationContext)
-                batteryRecyclerView.setHasFixedSize(true)
+                Log.i("BATT", batteries.size.toString())
+
+                updateUI(batteries)
             }
         })
+    }
+
+    private fun updateUI(batteryArray: ArrayList<BatteryItem>){
+        batteryRecyclerView.adapter = BatteryAdapter(batteryArray, context!!.applicationContext)
+        (batteryRecyclerView.adapter as BatteryAdapter).notifyDataSetChanged()
+        batteryRecyclerView.layoutManager = LinearLayoutManager(context!!.applicationContext)
+        batteryRecyclerView.setHasFixedSize(true)
     }
 }
