@@ -43,7 +43,7 @@ import org.json.JSONArray
 import retrofit2.Response
 
 private lateinit var retService: BatteryService
-private lateinit var errorsArray: MutableMap<String, String>
+private lateinit var errorsBatteryArray: MutableMap<String, String>
 
 class AddBatteryFragment : Fragment() {
 
@@ -123,7 +123,7 @@ class AddBatteryFragment : Fragment() {
         }else{
             var errorBuilder = StringBuffer()
 
-            for(error in errorsArray){
+            for(error in errorsBatteryArray){
                 errorBuilder.append(error.value)
                     .append("\n")
             }
@@ -151,41 +151,40 @@ class AddBatteryFragment : Fragment() {
     private fun validateBattery(): Boolean{
         var granted = true
 
-        errorsArray = mutableMapOf<String, String>()
+        errorsBatteryArray = mutableMapOf<String, String>()
 
         val batteryValidation = BatteryValidation()
 
         if(getBattery(edBatterySerial1.text.toString())){
-            errorsArray.put("Exists", "This Battery already in DB")
+            errorsBatteryArray.put("Exists", "This Battery already in DB")
         }
         
 
         if (!batteryValidation.checkSerial(edBatterySerial1.text.toString())){
-            errorsArray.put("Serial1", "Invalid Serial One")
+            errorsBatteryArray.put("Serial1", "Invalid Serial One")
         }
 
         if (edBatteryBox.text.toString() == "0"){
-            errorsArray.put("Box", "Box Number couldn't be 0")
+            errorsBatteryArray.put("Box", "Box Number couldn't be 0")
         }
 
         if (!edBatteryInvoice.text.isEmpty()){
             if (!batteryValidation.checkInvoice(edBatteryInvoice.text.toString())){
-                errorsArray.put("Invoice", "Invalid Invoice")
+                errorsBatteryArray.put("Invoice", "Invalid Invoice")
             }
         }
 
         if (!edBatteryCCD.text.isEmpty()){
             if (!batteryValidation.checkCcd(edBatteryCCD.text.toString())){
-                errorsArray.put("CCD", "Invalid CCD")
+                errorsBatteryArray.put("CCD", "Invalid CCD")
             }
         }
 
-        if (!errorsArray.isEmpty()){
+        if (!errorsBatteryArray.isEmpty()){
             granted = false
         }
 
-
-        Log.i("VALID", "${errorsArray.size}")
+        Log.i("VALID", "${errorsBatteryArray.size}")
         return granted
     }
 

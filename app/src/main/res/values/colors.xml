@@ -57,4 +57,12 @@
     <color name="colorDialogTextPrimary">#212121</color>
 
     <color name="colorIssuesTint">#FA1414</color>
+
+    <!--  Spinner Item color  -->
+    <color name="colorSpinnerItem">#434343</color>
+
+    <color name="colorTest">#DCDCDC</color>
+
+    <color name="backColorButton">#d3d3d3</color>
+
 </resources>

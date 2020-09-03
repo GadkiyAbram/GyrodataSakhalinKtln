@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gyrodatasakhalin.API_KEY
+import com.example.gyrodatasakhalin.JNUMBERS
 import com.example.gyrodatasakhalin.job.Job
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
@@ -72,6 +73,7 @@ class JobFragment : Fragment() {
                 while (jobList.hasNext()){
                     val jobItem = jobList.next()
                     jobs.add(jobItem)
+                    JNUMBERS.add(jobItem.jobNumber)
                 }
                 jobRecyclerView.adapter = JobAdapter(jobs, context!!.applicationContext)
                 (jobRecyclerView.adapter as JobAdapter).notifyDataSetChanged()

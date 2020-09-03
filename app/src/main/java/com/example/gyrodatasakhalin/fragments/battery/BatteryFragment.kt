@@ -13,7 +13,6 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gyrodatasakhalin.API_KEY
 import com.example.gyrodatasakhalin.BSERIALS
@@ -25,13 +24,6 @@ import com.example.gyrodatasakhalin.battery.BatteryItem
 import com.example.gyrodatasakhalin.battery.BatteryService
 import kotlinx.android.synthetic.main.activity_battery.*
 import kotlinx.android.synthetic.main.progress_bar.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import okhttp3.internal.notifyAll
-import okhttp3.internal.wait
 import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match

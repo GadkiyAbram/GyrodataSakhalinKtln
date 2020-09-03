@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit
 
 var API_KEY = ""
 var BSERIALS = ArrayList<String>()
+var JNUMBERS = ArrayList<String>()
+var TITEMSASSETS = HashMap<String, String>()
 
 class RetrofitInstance {
     companion object{

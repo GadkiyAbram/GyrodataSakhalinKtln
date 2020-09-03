@@ -1,42 +1,35 @@
 package com.example.gyrodatasakhalin.fragments.job
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
+import com.example.gyrodatasakhalin.JNUMBERS
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
+import com.example.gyrodatasakhalin.job.JobItem
 import com.example.gyrodatasakhalin.job.JobService
+import com.example.gyrodatasakhalin.utils.validation.JobValidation
 import kotlinx.android.synthetic.main.activity_job_add.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import retrofit2.Response
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import java.lang.Exception
 
 private lateinit var jobService: JobService
+private lateinit var errorsJobArray: MutableMap<String, String>
 
 class AddJobFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -55,6 +48,10 @@ class AddJobFragment : Fragment() {
             .create(JobService::class.java)
 
         getInitialJobData()
+
+        addJobButton.setOnClickListener {
+            addJob()
+        }
     }
 
     private fun getInitialJobData(){
@@ -108,5 +105,181 @@ class AddJobFragment : Fragment() {
                 Log.i("JOB", "ENGs: ${batteries.toString()}")
             }
         })
+    }
+
+    private fun addJob(){
+        val id = 0
+        val jobNumber = edJobJobNumber.text.toString()
+        val clientName = spinnerClient.selectedItem.toString()
+        val gdp = spinnerGDP.selectedItem.toString()
+        val modem = spinnerModem.selectedItem.toString()
+        val bbp = spinnerBullplug.selectedItem.toString()
+        val battery = spinnerBattery.selectedItem.toString()
+        val circulation = convertCirculation(edJobCirculation.text.toString())
+        val oldCirculation = 0
+        val modemVer = edJobModemVer.text.toString()
+        val maxTemp = edJobMaxTemp.text.toString()
+        val engOne = spinnerEngOne.selectedItem.toString()
+        val engTwo = spinnerEngTwo.selectedItem.toString()
+        val engOneArr = edJobEngOneArrived.text.toString()
+        val engTwoArr = edJobEngTwoArrived.text.toString()
+        val engOneLeft = edJobEngOneLeft.text.toString()
+        val engTwoLeft = edJobEngTwoLeft.text.toString()
+        val container = edJobContainer.text.toString()
+        val containerArr = edJobContArrived.text.toString()
+        val containerLeft = edJobContLeft.text.toString()
+        val rig = edJobRig.text.toString()
+
+//        TODO() - refactor this
+        val issues = "No"
+        val comment = edJobComments.text.toString()
+        val created = ""
+        val updated = ""
+        val expandable = false
+
+        val job = JobItem(battery,
+            bbp,
+            circulation,
+            clientName,
+            comment,
+            container,
+            containerArr,
+            containerLeft,
+            created,
+            engOneArr,
+            engOneLeft,
+            engTwoArr,
+            engTwoLeft,
+            engOne,
+            engTwo,
+            gdp,id,
+            issues,
+            jobNumber,
+            maxTemp,
+            modem,
+            modemVer,
+            oldCirculation,
+            rig,
+            updated,
+            expandable)
+
+        Log.i("JOB", "Job created: ${job}")
+
+        val responseLiveData : LiveData<Response<Int>> = liveData {
+            val response = jobService.addNewJob(job)
+            emit(response)
+        }
+        responseLiveData.observe(this@AddJobFragment, Observer {
+            val result = it.body()
+            if (result != null) {
+                if (pbWaiting != null && pbWaiting.isShown) {
+                    pbWaiting.visibility = View.GONE
+//                    clearEditTextViews()
+                }
+            }
+            Log.i("JOB", "Job Number: ${jobNumber} && ${result}")
+            if (pbWaiting != null && pbWaiting.isShown) {
+                pbWaiting.visibility = View.GONE
+            }
+            Toast.makeText(
+                context!!.applicationContext,
+                "Job ${jobNumber} added",
+                Toast.LENGTH_SHORT
+            ).show()
+            getInitialJobData()     // refresh the initial job data
+        })
+
+//        if(validateJob()){
+//            val responseLiveData : LiveData<Response<Int>> = liveData {
+//                val response = jobService.addNewJob(job)
+//                emit(response)
+//            }
+//            responseLiveData.observe(this@AddJobFragment, Observer {
+//                val result = it.body()
+//                if (result != null) {
+//                    if (pbWaiting != null && pbWaiting.isShown) {
+//                        pbWaiting.visibility = View.GONE
+////                    clearEditTextViews()
+//                    }
+//                }
+//                Log.i("RESULT", "Job Number 1: ${jobNumber} && ${result}")
+//                if (pbWaiting != null && pbWaiting.isShown) {
+//                    pbWaiting.visibility = View.GONE
+//                }
+//                Toast.makeText(
+//                    context!!.applicationContext,
+//                    "Job ${jobNumber} added",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            })
+//        }else{
+//            var errorBuilder = StringBuffer()
+//
+//            for(error in errorsJobArray){
+//                errorBuilder.append(error.value)
+//                    .append("\n")
+//            }
+//
+//            var errorDialog = AlertDialog.Builder(activity)
+//            errorDialog.setTitle("Uncertainties")
+//            errorDialog.setMessage(errorBuilder.toString())
+//            errorDialog.show()
+//        }
+    }
+
+    private fun validateJob(): Boolean{
+        var granted = true
+
+        errorsJobArray = mutableMapOf<String, String>()
+
+        val jobValidation = JobValidation()
+
+        if(checkJobExists(edJobJobNumber.text.toString())){
+            errorsJobArray.put("Exists", "Job already in DB")
+        }
+
+        if (!jobValidation.checkJobNumber(edJobJobNumber.text.toString())){
+            errorsJobArray.put("JobNumber", "Invalid Job Number")
+        }
+
+        if(!jobValidation.checkModemVersion(edJobModemVer.text.toString())){
+            errorsJobArray.put("ModemVersion", "Invalid Modem Version")
+        }
+
+//        TODO - validate maxTemperature
+//        if(!jobValidation.checkMaxTemp(edJobMaxTemp.text.toString())){
+//            errorsJobArray.put("MaxTemp", "Invalid Max Teperature")
+//        }
+
+//        TODO - validate circulation
+//        if (!(convertCirculation(edJobCirculation.text.toString()) is Float)){
+//            errorsJobArray.put("Circulation", "Circulation should be a number")
+//        }
+
+        if (!errorsJobArray.isEmpty()){
+            granted = false
+        }
+
+
+        Log.i("VALID", "${errorsJobArray.size}")
+        return granted
+    }
+
+    fun checkJobExists(jobNumber: String): Boolean{
+        var exists = false
+
+        if (JNUMBERS.contains(jobNumber)){exists = true}
+
+        return exists
+    }
+
+    fun convertCirculation(circulation: String): Float{
+        var circulationConverted: Float = 0F
+        try {
+            circulationConverted = circulation.toFloat()
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+        return circulationConverted
     }
 }

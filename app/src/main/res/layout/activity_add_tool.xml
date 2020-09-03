@@ -16,16 +16,26 @@
 
         <LinearLayout
             android:layout_margin="3dp"
-            android:gravity="center"
             android:background="@drawable/edittext_shape"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tvTitle"
+                android:layout_weight="1"
+                android:layout_gravity="center"
                 android:padding="7dp"
                 android:textSize="22dp"
                 android:text="New Item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/addItemBtn"
+                android:text="ADD"
+                android:textColor="#838383"
+                android:backgroundTint="@color/swipeBtnBackground"
+                android:layout_gravity="end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -176,7 +186,7 @@
                             android:padding="7dp"
                             android:background="@drawable/edittext_shape"
                             android:id="@+id/edItemNameRussian"
-                            android:hint="Название из CCD"
+                            android:hint="Name Russian CCD"
                             android:textSize="16dp"
                             android:layout_weight="4"
                             android:textAlignment="center"
@@ -360,5 +370,24 @@
         </ScrollView>
 
     </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="70dp"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddItemImage"
+            app:srcCompat="@drawable/frame"
+            android:backgroundTint="@color/colorTest"
+            app:fabSize="normal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="left|bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/backColorButton"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>

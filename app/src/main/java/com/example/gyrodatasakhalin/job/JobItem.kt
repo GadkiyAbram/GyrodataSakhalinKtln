@@ -9,7 +9,7 @@ data class JobItem(
     @SerializedName("Bullplug")
     val bullplug: String,
     @SerializedName("CirculationHours")
-    val circulationHours: Int,
+    val circulationHours: Float,
     @SerializedName("ClientName")
     val clientName: String,
     @SerializedName("Comment")
