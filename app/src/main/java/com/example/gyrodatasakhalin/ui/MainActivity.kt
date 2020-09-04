@@ -7,6 +7,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -24,6 +25,7 @@ import com.example.gyrodatasakhalin.fragments.tool.ToolFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fab_layout.*
+import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.coroutines.Job
 
 
@@ -65,6 +67,8 @@ class MainActivity : AppCompatActivity() {
 //        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 //        setupBottomNavMenu(navController)
 //        setupActionBar(navController)
+
+
 
         fbAddMain.setOnClickListener {
             onAddMainButtonClicked()
