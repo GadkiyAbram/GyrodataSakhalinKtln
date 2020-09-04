@@ -1,42 +1,40 @@
 package com.example.gyrodatasakhalin.fragments.dashboard
 
 import android.os.Bundle
-import android.text.TextUtils.replace
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.liveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gyrodatasakhalin.JNUMBERS
 import com.example.gyrodatasakhalin.R
-import com.example.gyrodatasakhalin.fragments.battery.AddBatteryFragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fab_layout.*
+import com.example.gyrodatasakhalin.RetrofitInstance
+import com.example.gyrodatasakhalin.battery.Battery
+import com.example.gyrodatasakhalin.battery.BatteryItem
+import com.example.gyrodatasakhalin.battery.BatteryService
+import com.example.gyrodatasakhalin.job.Job
+import com.example.gyrodatasakhalin.job.JobAdapter
+import com.example.gyrodatasakhalin.job.JobItem
+import com.example.gyrodatasakhalin.job.JobService
+import com.example.gyrodatasakhalin.tool.Tool
+import com.example.gyrodatasakhalin.tool.ToolAdapter
+import com.example.gyrodatasakhalin.tool.ToolItem
+import com.example.gyrodatasakhalin.tool.ToolService
+import kotlinx.android.synthetic.main.activity_job.*
+import kotlinx.android.synthetic.main.activity_tool.*
+import kotlinx.android.synthetic.main.fragment_dashboard.*
+import kotlinx.android.synthetic.main.progress_bar.*
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private lateinit var toolService: ToolService
+private lateinit var batteryService: BatteryService
+private lateinit var jobService: JobService
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DashboardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DashboardFragment : Fragment() {
-
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,5 +46,83 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolService = RetrofitInstance.getRetrofitInstance().create(ToolService::class.java)
+        batteryService = RetrofitInstance.getRetrofitInstance().create(BatteryService::class.java)
+        jobService = RetrofitInstance.getRetrofitInstance().create(JobService::class.java)
+
+        getDashboardData("", "")
+    }
+
+    private fun getDashboardData(what: String, where: String){
+        var tools = ArrayList<String>()
+        var batteries = ArrayList<String>()
+        var jobs = ArrayList<String>()
+
+        // getting battery data
+        val responseBatteryLiveData : LiveData<Response<Battery>> = liveData {
+            val response = batteryService.getCustomBatteries(what, where)
+            emit(response)
+        }
+
+        responseBatteryLiveData.observe(this@DashboardFragment, Observer {
+            val batteryList = it.body()?.listIterator()
+
+            if (batteryList != null){
+
+                while (batteryList.hasNext()){
+                    val batteryItem = batteryList.next()
+                    batteries.add(batteryItem.updatedAt)
+                }
+            }
+            batteries.sort()
+            val updatedBatteriesLast = batteries.get(batteries.size - 1)
+            val batteriesTotal = batteries.size.toString()
+            batteries_updated.text = updatedBatteriesLast
+            batteries_total.text = batteriesTotal
+        })
+
+        // getting tool data
+        val responseToolLiveData : LiveData<Response<Tool>> = liveData {
+            val response = toolService.getCustomItems(what, where)
+            emit(response)
+        }
+
+        responseToolLiveData.observe(this, Observer {
+            val toolList = it.body()?.listIterator()
+            if (toolList != null){
+
+                while (toolList.hasNext()){
+                    val toolItem = toolList.next()
+                    tools.add(toolItem.updatedAt)
+                }
+            }
+            val updatedToolsLast = tools.get(tools.size - 1)
+            val toolsTotal = tools.size.toString()
+            tools_updated.text = updatedToolsLast
+            items_total.text = toolsTotal
+        })
+
+        // getting job data
+        val responseJobLiveData : LiveData<Response<Job>> = liveData {
+            val response = jobService.getCustomJobs(what, where)
+            emit(response)
+        }
+
+        responseJobLiveData.observe(this, Observer {
+            val jobList = it.body()?.listIterator()
+            if (jobList != null){
+
+                while (jobList.hasNext()){
+                    val jobItem = jobList.next()
+                    jobs.add(jobItem.updatedAt)
+                }
+            }
+            val updatedJobList = jobs.get(jobs.size - 1)
+            val jobsTotal = jobs.size.toString()
+            jobs_updated.text = updatedJobList
+            jobs_total.text = jobsTotal
+        })
+
     }
 }

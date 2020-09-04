@@ -8,13 +8,11 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
-import androidx.lifecycle.observe
 import com.example.gyrodatasakhalin.API_KEY
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
 import com.example.gyrodatasakhalin.auth.AuthModel
 import com.example.gyrodatasakhalin.auth.AuthService
-import com.example.gyrodatasakhalin.battery.BatteryActivity
 import com.example.gyrodatasakhalin.ui.MainActivity
 import com.example.gyrodatasakhalin.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_start.*

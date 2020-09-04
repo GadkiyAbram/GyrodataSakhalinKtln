@@ -20,101 +20,124 @@
 
             <LinearLayout
 
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/linLayoutUp"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tvToolItem"
-                        android:layout_weight="1"
-                        android:text="Gyro Section"
-                        android:textAlignment="textStart"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/tvToolAsset"
-                        android:layout_weight="1"
-                        android:text="G0211H"
-                        android:textAlignment="textStart"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/tvToolCircHrs"
-                        android:layout_weight="1"
-                        android:text="C/h: 53.73"
-                        android:textAlignment="textEnd"
-                        android:layout_marginRight="10dp"
-                        android:textSize="14dp"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:id="@+id/itemImagePreview"
+                        android:background="@drawable/ic_item_image_preview"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@color/layoutInner"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:text="Arrived:"
-                        android:layout_weight="1"
-                        android:textAlignment="textStart"
-                        android:textSize="16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/tvToolArrived"
-                        android:text="21/11/2017"
-                        android:layout_weight="1"
-                        android:textAlignment="textEnd"
-                        android:textSize="14dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:id="@+id/linLayoutUp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvToolItem"
+                            android:layout_weight="1"
+                            android:text="Gyro Section"
+                            android:textAlignment="textStart"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/tvToolAsset"
+                            android:layout_weight="1"
+                            android:text="G0211H"
+                            android:textAlignment="textStart"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/tvToolCircHrs"
+                            android:layout_weight="1"
+                            android:text="C/h: 53.73"
+                            android:textAlignment="textEnd"
+                            android:layout_marginRight="10dp"
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:background="@color/layoutInner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:text="Arrived:"
+                            android:layout_weight="1"
+                            android:textAlignment="textStart"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:id="@+id/tvToolArrived"
+                            android:text="21/11/2017"
+                            android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:textSize="14dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:background="@color/layoutInner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:text="Invoice:"
+                            android:layout_weight="1"
+                            android:textAlignment="textStart"
+                            android:textSize="16dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:id="@+id/tvToolInvoice"
+                            android:text="O/21/11"
+                            android:layout_weight="1"
+                            android:textAlignment="textEnd"
+                            android:textSize="14dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="@color/layoutInner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:text="Invoice:"
-                        android:layout_weight="1"
-                        android:textAlignment="textStart"
-                        android:textSize="16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/tvToolInvoice"
-                        android:text="O/21/11"
-                        android:layout_weight="1"
-                        android:textAlignment="textEnd"
-                        android:textSize="14dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
 
-                </LinearLayout>
 
             </LinearLayout>
 

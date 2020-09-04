@@ -1,5 +1,6 @@
 package com.example.gyrodatasakhalin.ui
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -67,8 +68,6 @@ class MainActivity : AppCompatActivity() {
 //        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 //        setupBottomNavMenu(navController)
 //        setupActionBar(navController)
-
-
 
         fbAddMain.setOnClickListener {
             onAddMainButtonClicked()

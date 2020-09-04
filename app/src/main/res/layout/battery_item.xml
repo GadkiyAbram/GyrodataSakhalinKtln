@@ -36,8 +36,7 @@
                 android:layout_toEndOf="@id/tvCondition"
                 android:text="Serial One"
                 android:textColor="@color/colorSimpleBlack"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"/>
 
             <TextView
                 android:paddingLeft="15dp"

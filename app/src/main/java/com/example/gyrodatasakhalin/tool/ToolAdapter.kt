@@ -1,9 +1,11 @@
 package com.example.gyrodatasakhalin.tool
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64.decode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +38,7 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
         val toolInvoice: TextView = itemView.findViewById(R.id.tvToolInvoice)
         // Precise Tool Data
         val toolImage: ImageView = itemView.findViewById(R.id.imageItemPhoto)
+        val toolImagePreview: ImageView = itemView.findViewById(R.id.itemImagePreview)
     }
 
     private fun getContext() : Context {
@@ -62,12 +65,13 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
         holder.toolCircHrs.text = currentTool.circulation.toString()
         holder.toolArrived.text = currentTool.arrived
         holder.toolInvoice.text = currentTool.invoice
+
         // Precise Tool Data
-        if (currentTool.itemImage != null){
+        if (currentTool.itemImage != ""){
             var decodedImage: Bitmap = prepareImage(currentTool.itemImage)
             holder.toolImage.setImageBitmap(decodedImage)
+            holder.toolImagePreview.setImageBitmap(decodedImage)
         }
-
 
         val isExpandable: Boolean = toolList[position].expandable
         holder.expandableToolLayout.visibility = if (isExpandable) View.VISIBLE else View.GONE
@@ -80,10 +84,12 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
     }
 
     private fun prepareImage(imageRecievedInString: String): Bitmap {
+
         var decodedImageInBytes: Bitmap? = null
 //        val imageInBytes = Base64.getDecoder().decode(imageRecievedInString)
         val imageInBytes = android.util.Base64.decode(imageRecievedInString, android.util.Base64.DEFAULT)
         decodedImageInBytes = BitmapFactory.decodeByteArray(imageInBytes, 0, imageInBytes.size)
+
         return decodedImageInBytes
     }
 }
