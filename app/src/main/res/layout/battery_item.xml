@@ -5,6 +5,7 @@
     android:layout_margin="4dp">
 
     <LinearLayout
+        android:background="@color/layoutInner"
         android:id="@+id/mainBatteryLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -34,11 +35,13 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/tvCondition"
                 android:text="Serial One"
+                android:textColor="@color/colorSimpleBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:paddingLeft="15dp"
+                android:textColor="@color/colorSimpleBlack"
                 android:id="@+id/battery_arrived"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

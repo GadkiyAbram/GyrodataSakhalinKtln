@@ -1,45 +1,25 @@
 package com.example.gyrodatasakhalin.fragments.battery
 
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
-import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gyrodatasakhalin.API_KEY
 import com.example.gyrodatasakhalin.BSERIALS
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
-import com.example.gyrodatasakhalin.battery.Battery
-import com.example.gyrodatasakhalin.battery.BatteryAdapter
 import com.example.gyrodatasakhalin.battery.BatteryItem
 import com.example.gyrodatasakhalin.battery.BatteryService
-import com.example.gyrodatasakhalin.start.StartActivity
 import com.example.gyrodatasakhalin.utils.validation.BatteryValidation
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_add_battery.*
-import kotlinx.android.synthetic.main.activity_battery.*
 import kotlinx.android.synthetic.main.battery_condition_switch.*
 import kotlinx.android.synthetic.main.progress_bar.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONArray
 import retrofit2.Response
 
 private lateinit var retService: BatteryService

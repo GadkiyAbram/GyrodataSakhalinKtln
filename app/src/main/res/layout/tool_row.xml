@@ -201,7 +201,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.github.chrisbanes.photoview.PhotoView
+            <ImageView
                 android:minHeight="200dp"
                 android:id="@+id/imageItemPhoto"
                 android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil.decode
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
         val toolArrived: TextView = itemView.findViewById(R.id.tvToolArrived)
         val toolInvoice: TextView = itemView.findViewById(R.id.tvToolInvoice)
         // Precise Tool Data
-        val toolImage: PhotoView = itemView.findViewById(R.id.imageItemPhoto)
+        val toolImage: ImageView = itemView.findViewById(R.id.imageItemPhoto)
     }
 
     private fun getContext() : Context {
@@ -80,7 +81,8 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
 
     private fun prepareImage(imageRecievedInString: String): Bitmap {
         var decodedImageInBytes: Bitmap? = null
-        val imageInBytes = Base64.getDecoder().decode(imageRecievedInString)
+//        val imageInBytes = Base64.getDecoder().decode(imageRecievedInString)
+        val imageInBytes = android.util.Base64.decode(imageRecievedInString, android.util.Base64.DEFAULT)
         decodedImageInBytes = BitmapFactory.decodeByteArray(imageInBytes, 0, imageInBytes.size)
         return decodedImageInBytes
     }
