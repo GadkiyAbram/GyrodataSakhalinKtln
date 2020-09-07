@@ -69,22 +69,22 @@ class DashboardFragment : Fragment() {
             emit(response)
         }
 
-        responseBatteryLiveData.observe(this@DashboardFragment, Observer {
-            val batteryList = it.body()?.listIterator()
-
-            if (batteryList != null){
-
-                while (batteryList.hasNext()){
-                    val batteryItem = batteryList.next()
-                    batteries.add(batteryItem.updatedAt)
-                }
-            }
-            batteries.sort()
-            val updatedBatteriesLast = batteries.get(batteries.size - 1)
-            val batteriesTotal = batteries.size.toString()
-            batteries_updated.text = updatedBatteriesLast
-            batteries_total.text = batteriesTotal
-        })
+//        responseBatteryLiveData.observe(this@DashboardFragment, Observer {
+//            val batteryList = it.body()?.listIterator()
+//
+//            if (batteryList != null){
+//
+//                while (batteryList.hasNext()){
+//                    val batteryItem = batteryList.next()
+//                    batteries.add(batteryItem.updatedAt)
+//                }
+//            }
+//            batteries.sort()
+//            val updatedBatteriesLast = batteries.get(batteries.size - 1)
+//            val batteriesTotal = batteries.size.toString()
+//            batteries_updated.text = updatedBatteriesLast
+//            batteries_total.text = batteriesTotal
+//        })
 
         // getting tool data
         val responseToolLiveData : LiveData<Response<Tool>> = liveData {
@@ -94,39 +94,44 @@ class DashboardFragment : Fragment() {
 
         responseToolLiveData.observe(this, Observer {
             val toolList = it.body()?.listIterator()
+            Log.i("DASH", "${toolList}")
             if (toolList != null){
 
-                while (toolList.hasNext()){
-                    val toolItem = toolList.next()
-                    tools.add(toolItem.updatedAt)
-                }
+//                while (toolList.hasNext()){
+//                    val toolItem = toolList.next()
+//                    tools.add(toolItem.updatedAt)
+//                }
+//                val updatedToolsLast = tools.get(tools.size - 1)
+//                val toolsTotal = tools.size.toString()
+//                tools_updated.text = updatedToolsLast
+//                items_total.text = toolsTotal
+            }else{
+                tools_updated.text = "No data"
+                items_total.text = "No data"
             }
-            val updatedToolsLast = tools.get(tools.size - 1)
-            val toolsTotal = tools.size.toString()
-            tools_updated.text = updatedToolsLast
-            items_total.text = toolsTotal
+
         })
 
         // getting job data
-        val responseJobLiveData : LiveData<Response<Job>> = liveData {
-            val response = jobService.getCustomJobs(what, where)
-            emit(response)
-        }
-
-        responseJobLiveData.observe(this, Observer {
-            val jobList = it.body()?.listIterator()
-            if (jobList != null){
-
-                while (jobList.hasNext()){
-                    val jobItem = jobList.next()
-                    jobs.add(jobItem.updatedAt)
-                }
-            }
-            val updatedJobList = jobs.get(jobs.size - 1)
-            val jobsTotal = jobs.size.toString()
-            jobs_updated.text = updatedJobList
-            jobs_total.text = jobsTotal
-        })
+//        val responseJobLiveData : LiveData<Response<Job>> = liveData {
+//            val response = jobService.getCustomJobs(what, where)
+//            emit(response)
+//        }
+//
+//        responseJobLiveData.observe(this, Observer {
+//            val jobList = it.body()?.listIterator()
+//            if (jobList != null){
+//
+//                while (jobList.hasNext()){
+//                    val jobItem = jobList.next()
+//                    jobs.add(jobItem.updatedAt)
+//                }
+//            }
+//            val updatedJobList = jobs.get(jobs.size - 1)
+//            val jobsTotal = jobs.size.toString()
+//            jobs_updated.text = updatedJobList
+//            jobs_total.text = jobsTotal
+//        })
 
     }
 }
