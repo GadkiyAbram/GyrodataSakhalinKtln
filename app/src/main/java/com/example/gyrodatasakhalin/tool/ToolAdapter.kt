@@ -63,14 +63,15 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
     override fun onBindViewHolder(holder: ToolViewHolder, position: Int) {
         val currentTool = toolList[position]
         // Preview Battery Data
+        holder.toolImagePreview.setImageResource(R.drawable.ic_item_image_preview)
+
         holder.toolItem.text = currentTool.item
 
         holder.toolAsset.text = currentTool.asset
         holder.toolCircHrs.text = currentTool.circulation.toString()
         holder.toolArrived.text = currentTool.arrived
         holder.toolInvoice.text = currentTool.invoice
-
-        Log.i(TAG, "Current Tool: ${currentTool.itemImage}")
+        holder.toolImage.setImageResource(R.drawable.ic_item_image_preview)
 
 //         Precise Tool Data
         if (currentTool.itemImage != "" && currentTool.itemImage != null){
