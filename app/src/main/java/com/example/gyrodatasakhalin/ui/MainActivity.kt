@@ -1,21 +1,18 @@
 package com.example.gyrodatasakhalin.ui
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
-import android.widget.Toolbar
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.gyrodatasakhalin.R
+import com.example.gyrodatasakhalin.RetrofitInstance
+import com.example.gyrodatasakhalin.auth.AuthService
 import com.example.gyrodatasakhalin.fragments.battery.AddBatteryFragment
 import com.example.gyrodatasakhalin.fragments.battery.BatteryFragment
 import com.example.gyrodatasakhalin.fragments.dashboard.DashboardFragment
@@ -23,39 +20,20 @@ import com.example.gyrodatasakhalin.fragments.job.AddJobFragment
 import com.example.gyrodatasakhalin.fragments.job.JobFragment
 import com.example.gyrodatasakhalin.fragments.tool.AddToolFragment
 import com.example.gyrodatasakhalin.fragments.tool.ToolFragment
+import com.example.gyrodatasakhalin.utils.AppPreferences
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_start.*
 import kotlinx.android.synthetic.main.fab_layout.*
-import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.coroutines.Job
+import androidx.lifecycle.Observer
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val rotationOpen: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            this,
-            R.anim.rotate_open_anim
-        )
-    }
-    private val rotationClose: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            this,
-            R.anim.rotate_close_anim
-        )
-    }
-    private val fromBottom: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            this,
-            R.anim.from_bottom_anim
-        )
-    }
-    private val toBottom: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            this,
-            R.anim.to_bottom_anim
-        )
-    }
+    private val rotationOpen: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim) }
+    private val rotationClose: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim) }
+    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
+    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim) }
 
     private var clicked = false
 
@@ -69,9 +47,11 @@ class MainActivity : AppCompatActivity() {
 //        setupBottomNavMenu(navController)
 //        setupActionBar(navController)
 
+
         fbAddMain.setOnClickListener {
             onAddMainButtonClicked()
         }
+
 
         fbAddToolButton.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
@@ -110,6 +90,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
     }
 
     private fun makeCurrentFragment(fragment: Fragment) {

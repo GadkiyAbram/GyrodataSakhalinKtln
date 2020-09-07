@@ -1,6 +1,8 @@
 package com.example.gyrodatasakhalin.start
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +16,10 @@ import com.example.gyrodatasakhalin.RetrofitInstance
 import com.example.gyrodatasakhalin.auth.AuthModel
 import com.example.gyrodatasakhalin.auth.AuthService
 import com.example.gyrodatasakhalin.ui.MainActivity
+import com.example.gyrodatasakhalin.ui.NetworkConnection
 import com.example.gyrodatasakhalin.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_start.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import retrofit2.Response
 
@@ -38,11 +40,12 @@ class StartActivity : AppCompatActivity() {
         authService = RetrofitInstance.getRetrofitInstance()
             .create(AuthService::class.java)
 
-
         btnLogin.setOnClickListener {
 
             startOrGetNewToken()
         }
+
+
     }
 
     private fun validateToken(): Boolean {
@@ -75,6 +78,7 @@ class StartActivity : AppCompatActivity() {
         }
 
         postResponse.observe(this, Observer {
+
             val receivedToken = it.body()
             if (receivedToken != null){
                 token = receivedToken.toString()
@@ -107,13 +111,12 @@ class StartActivity : AppCompatActivity() {
             val decision = launch {
                 if (validated){
                     Log.i("TOKEN", "Token = ${validated} Starting MainActivity")
-                startMainActivity()
+                    startMainActivity()
                 }else{
                     Log.i("TOKEN", "Token = ${validated} Requesting New Token")
-                getToken()
+                    getToken()
                 }
             }
-
         }
     }
 }

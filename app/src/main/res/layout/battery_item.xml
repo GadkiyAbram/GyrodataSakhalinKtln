@@ -46,7 +46,17 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/serial_one"
                 android:layout_toEndOf="@id/tvCondition"
-                android:text="Battery CCD" />
+                android:text="Arrived" />
+
+            <TextView
+                android:paddingLeft="15dp"
+                android:textColor="@color/colorSimpleBlack"
+                android:id="@+id/battery_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/serial_one"
+                android:layout_toEndOf="@id/tvCondition"
+                android:text="Invoice" />
 
         </LinearLayout>
 

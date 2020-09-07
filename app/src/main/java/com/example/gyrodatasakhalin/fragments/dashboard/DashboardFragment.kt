@@ -1,5 +1,6 @@
 package com.example.gyrodatasakhalin.fragments.dashboard
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -24,6 +25,7 @@ import com.example.gyrodatasakhalin.tool.Tool
 import com.example.gyrodatasakhalin.tool.ToolAdapter
 import com.example.gyrodatasakhalin.tool.ToolItem
 import com.example.gyrodatasakhalin.tool.ToolService
+import com.example.gyrodatasakhalin.ui.NetworkConnection
 import kotlinx.android.synthetic.main.activity_job.*
 import kotlinx.android.synthetic.main.activity_tool.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -51,7 +53,9 @@ class DashboardFragment : Fragment() {
         batteryService = RetrofitInstance.getRetrofitInstance().create(BatteryService::class.java)
         jobService = RetrofitInstance.getRetrofitInstance().create(JobService::class.java)
 
+
         getDashboardData("", "")
+
     }
 
     private fun getDashboardData(what: String, where: String){

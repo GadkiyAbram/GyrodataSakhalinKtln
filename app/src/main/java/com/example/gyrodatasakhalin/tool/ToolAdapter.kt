@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.util.Base64.decode
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,8 @@ import java.lang.Byte.decode
 import java.net.URLDecoder.decode
 import java.security.spec.PSSParameterSpec.DEFAULT
 import java.util.*
+
+val TAG = "TOOL"
 
 
 class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : RecyclerView.Adapter<ToolAdapter.ToolViewHolder>() {
@@ -61,13 +64,16 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
         val currentTool = toolList[position]
         // Preview Battery Data
         holder.toolItem.text = currentTool.item
+
         holder.toolAsset.text = currentTool.asset
         holder.toolCircHrs.text = currentTool.circulation.toString()
         holder.toolArrived.text = currentTool.arrived
         holder.toolInvoice.text = currentTool.invoice
 
-        // Precise Tool Data
-        if (currentTool.itemImage != ""){
+        Log.i(TAG, "Current Tool: ${currentTool.itemImage}")
+
+//         Precise Tool Data
+        if (currentTool.itemImage != "" && currentTool.itemImage != null){
             var decodedImage: Bitmap = prepareImage(currentTool.itemImage)
             holder.toolImage.setImageBitmap(decodedImage)
             holder.toolImagePreview.setImageBitmap(decodedImage)
@@ -80,6 +86,10 @@ class ToolAdapter(private val toolList: List<ToolItem>, context: Context) : Recy
             var currentTool = toolList[position]
             currentTool.expandable = !currentTool.expandable
             notifyItemChanged(position)
+        }
+
+        if (currentTool.circulation >= 400){
+            holder.toolCircHrs.setTextColor(Color.RED)
         }
     }
 

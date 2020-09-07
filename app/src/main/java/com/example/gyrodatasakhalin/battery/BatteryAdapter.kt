@@ -21,7 +21,8 @@ class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Contex
     class BatteryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val batteryCondition: TextView = itemView.tvCondition
         val serialOne: TextView = itemView.serial_one
-        val batteryCCD: TextView = itemView.battery_arrived
+        val batteryArrived: TextView = itemView.battery_arrived
+        val batteryInvoicePrev: TextView = itemView.battery_invoice
         val mainBatteryLayout: LinearLayout = itemView.mainBatteryLayout
         val expandableBatteryLayout: LinearLayout = itemView.expandableBatteryLayout
         //Precise Battery Data
@@ -54,8 +55,9 @@ class BatteryAdapter(private val batteryList: List<BatteryItem>, context: Contex
         val currentBattery = batteryList[position]
         // Preview Battery Data
         holder.serialOne.text = currentBattery.serialOne
-        holder.batteryCCD.text = currentBattery.CCD
+        holder.batteryArrived.text = currentBattery.arrived
         holder.batteryCondition.text = getCondition(currentBattery.batteryCondition)
+        holder.batteryInvoicePrev.text = "Invoice: ${currentBattery.invoice}"
         val circleColor : GradientDrawable = holder.batteryCondition.background.current as GradientDrawable
         val color : Int = getConditionColor(currentBattery.batteryCondition)
         Log.i("COLOR", color.toString())

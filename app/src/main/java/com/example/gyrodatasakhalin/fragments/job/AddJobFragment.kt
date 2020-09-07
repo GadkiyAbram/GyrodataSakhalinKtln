@@ -1,5 +1,6 @@
 package com.example.gyrodatasakhalin.fragments.job
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -165,66 +166,66 @@ class AddJobFragment : Fragment() {
 
         Log.i("JOB", "Job created: ${job}")
 
-        val responseLiveData : LiveData<Response<Int>> = liveData {
-            val response = jobService.addNewJob(job)
-            emit(response)
-        }
-        responseLiveData.observe(this@AddJobFragment, Observer {
-            val result = it.body()
-            if (result != null) {
-                if (pbWaiting != null && pbWaiting.isShown) {
-                    pbWaiting.visibility = View.GONE
-//                    clearEditTextViews()
-                }
-            }
-            Log.i("JOB", "Job Number: ${jobNumber} && ${result}")
-            if (pbWaiting != null && pbWaiting.isShown) {
-                pbWaiting.visibility = View.GONE
-            }
-            Toast.makeText(
-                context!!.applicationContext,
-                "Job ${jobNumber} added",
-                Toast.LENGTH_SHORT
-            ).show()
-            getInitialJobData()     // refresh the initial job data
-        })
-
-//        if(validateJob()){
-//            val responseLiveData : LiveData<Response<Int>> = liveData {
-//                val response = jobService.addNewJob(job)
-//                emit(response)
-//            }
-//            responseLiveData.observe(this@AddJobFragment, Observer {
-//                val result = it.body()
-//                if (result != null) {
-//                    if (pbWaiting != null && pbWaiting.isShown) {
-//                        pbWaiting.visibility = View.GONE
-////                    clearEditTextViews()
-//                    }
-//                }
-//                Log.i("RESULT", "Job Number 1: ${jobNumber} && ${result}")
+//        val responseLiveData : LiveData<Response<Int>> = liveData {
+//            val response = jobService.addNewJob(job)
+//            emit(response)
+//        }
+//        responseLiveData.observe(this@AddJobFragment, Observer {
+//            val result = it.body()
+//            if (result != null) {
 //                if (pbWaiting != null && pbWaiting.isShown) {
 //                    pbWaiting.visibility = View.GONE
+////                    clearEditTextViews()
 //                }
-//                Toast.makeText(
-//                    context!!.applicationContext,
-//                    "Job ${jobNumber} added",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            })
-//        }else{
-//            var errorBuilder = StringBuffer()
-//
-//            for(error in errorsJobArray){
-//                errorBuilder.append(error.value)
-//                    .append("\n")
 //            }
-//
-//            var errorDialog = AlertDialog.Builder(activity)
-//            errorDialog.setTitle("Uncertainties")
-//            errorDialog.setMessage(errorBuilder.toString())
-//            errorDialog.show()
-//        }
+//            Log.i("JOB", "Job Number: ${jobNumber} && ${result}")
+//            if (pbWaiting != null && pbWaiting.isShown) {
+//                pbWaiting.visibility = View.GONE
+//            }
+//            Toast.makeText(
+//                context!!.applicationContext,
+//                "Job ${jobNumber} added",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//            getInitialJobData()     // refresh the initial job data
+//        })
+
+        if(validateJob()){
+            val responseLiveData : LiveData<Response<Int>> = liveData {
+                val response = jobService.addNewJob(job)
+                emit(response)
+            }
+            responseLiveData.observe(this@AddJobFragment, Observer {
+                val result = it.body()
+                if (result != null) {
+                    if (pbWaiting != null && pbWaiting.isShown) {
+                        pbWaiting.visibility = View.GONE
+//                    clearEditTextViews()
+                    }
+                }
+                Log.i("RESULT", "Job Number 1: ${jobNumber} && ${result}")
+                if (pbWaiting != null && pbWaiting.isShown) {
+                    pbWaiting.visibility = View.GONE
+                }
+                Toast.makeText(
+                    context!!.applicationContext,
+                    "Job ${jobNumber} added",
+                    Toast.LENGTH_SHORT
+                ).show()
+            })
+        }else{
+            var errorBuilder = StringBuffer()
+
+            for(error in errorsJobArray){
+                errorBuilder.append(error.value)
+                    .append("\n")
+            }
+
+            var errorDialog = AlertDialog.Builder(activity)
+            errorDialog.setTitle("Uncertainties")
+            errorDialog.setMessage(errorBuilder.toString())
+            errorDialog.show()
+        }
     }
 
     private fun validateJob(): Boolean{
@@ -235,26 +236,24 @@ class AddJobFragment : Fragment() {
         val jobValidation = JobValidation()
 
         if(checkJobExists(edJobJobNumber.text.toString())){
-            errorsJobArray.put("Exists", "Job already in DB")
+            errorsJobArray["Exists"] = "Job already in DB"
         }
 
         if (!jobValidation.checkJobNumber(edJobJobNumber.text.toString())){
-            errorsJobArray.put("JobNumber", "Invalid Job Number")
+            errorsJobArray["JobNumber"] = "Invalid Job Number"
         }
 
         if(!jobValidation.checkModemVersion(edJobModemVer.text.toString())){
-            errorsJobArray.put("ModemVersion", "Invalid Modem Version")
+            errorsJobArray["ModemVersion"] = "Invalid Modem Version"
         }
 
-//        TODO - validate maxTemperature
-//        if(!jobValidation.checkMaxTemp(edJobMaxTemp.text.toString())){
-//            errorsJobArray.put("MaxTemp", "Invalid Max Teperature")
-//        }
+        if(!jobValidation.checkMaxTemp(edJobMaxTemp.text.toString())){
+            errorsJobArray["MaxTemp"] = "Invalid Max Temperature"
+        }
 
-//        TODO - validate circulation
-//        if (!(convertCirculation(edJobCirculation.text.toString()) is Float)){
-//            errorsJobArray.put("Circulation", "Circulation should be a number")
-//        }
+        if (!(convertCirculation(edJobCirculation.text.toString()) is Float)){
+            errorsJobArray["Circulation"] = "Circulation should be a number"
+        }
 
         if (!errorsJobArray.isEmpty()){
             granted = false
