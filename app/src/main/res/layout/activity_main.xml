@@ -28,7 +28,7 @@
 
     </FrameLayout>
 
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/layoutWithFab"
         android:layout_gravity="bottom|end"
         android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
 
         <include layout="@layout/fab_layout"/>
 
-    </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
         android:layout_gravity="bottom"

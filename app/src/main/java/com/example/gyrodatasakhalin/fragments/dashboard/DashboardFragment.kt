@@ -28,6 +28,7 @@ import com.example.gyrodatasakhalin.tool.ToolService
 import com.example.gyrodatasakhalin.ui.NetworkConnection
 import kotlinx.android.synthetic.main.activity_job.*
 import kotlinx.android.synthetic.main.activity_tool.*
+import kotlinx.android.synthetic.main.fab_layout.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import retrofit2.Response

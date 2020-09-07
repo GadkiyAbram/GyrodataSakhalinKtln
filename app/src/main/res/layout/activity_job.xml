@@ -83,6 +83,7 @@
             android:id="@+id/jobRecyclerView"
             android:padding="4dp"
             android:clipToPadding="false"
+            android:minHeight="500dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/job_item"/>
