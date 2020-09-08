@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".fragments.job.JobFragment">
 
-    <include layout="@layout/activity_job"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/activity_job"/>
+
+    </ScrollView>
+
 
 </FrameLayout>
