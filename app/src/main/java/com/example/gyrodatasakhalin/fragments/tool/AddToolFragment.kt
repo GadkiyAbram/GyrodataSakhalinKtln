@@ -1,10 +1,10 @@
 package com.example.gyrodatasakhalin.fragments.tool
 
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -13,14 +13,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
+import com.example.gyrodatasakhalin.TITEMSASSETS
 import com.example.gyrodatasakhalin.tool.ToolItem
 import com.example.gyrodatasakhalin.tool.ToolService
 import kotlinx.android.synthetic.main.activity_add_tool.*
@@ -130,23 +129,69 @@ class AddToolFragment : Fragment() {
             gwdUpdated
         )
 
-        val responseLiveData : LiveData<Response<Int>> = liveData {
-            val response = toolService.addNewItem(gwdItemToInsert)
-            emit(response)
+        if (validateItem(gwdItem, gwdAsset)){
+            val responseLiveData : LiveData<Response<Int>> = liveData {
+                val response = toolService.addNewItem(gwdItemToInsert)
+                emit(response)
+            }
+
+            responseLiveData.observe(this, Observer {
+                val result = it.body()
+                if (result != null){
+
+                    if (pbWaiting != null && pbWaiting.isShown){
+                        pbWaiting.visibility = View.GONE
+                    }
+
+                    Toast.makeText(context!!.applicationContext, "${gwdItem} ${gwdAsset} added", Toast.LENGTH_SHORT).show()
+                    TITEMSASSETS.put(gwdAsset, gwdItem)
+                }
+            })
+        }else{
+            var errorBuilder = StringBuffer()
+
+            for(error in errorsItemArray){
+                errorBuilder.append(error.value)
+                    .append("\n")
+            }
+
+            var errorDialog = AlertDialog.Builder(activity)
+            errorDialog.setTitle("Uncertainties")
+            errorDialog.setMessage(errorBuilder.toString())
+            errorDialog.show()
+        }
+    }
+
+    private fun validateItem(item: String, asset: String): Boolean{
+        var granted = true
+
+        errorsItemArray = mutableMapOf<String, String>()
+
+        if (item == "GDP Sections" || item == "GWD Modem" || item == "GWD Bullplug"){
+            if (asset.length == 0){
+                errorsItemArray.put("Asset", "Asset couldn't be empty")
+            }
         }
 
-        responseLiveData.observe(this, Observer {
-            val result = it.body()
-            if (result != null){
+        if (checkToolExists(item, asset)){
+            errorsItemArray.put("Exists", "${item} ${asset} already exists")
+        }
 
-                if (pbWaiting != null && pbWaiting.isShown){
-                    pbWaiting.visibility = View.GONE
-                }
+        if (!errorsItemArray.isEmpty()){
+            granted = false
+        }
 
-                Toast.makeText(context!!.applicationContext, "${gwdItem} ${gwdAsset} added", Toast.LENGTH_SHORT).show()
+        return granted
+    }
+
+    private fun checkToolExists(item: String, asset: String): Boolean {
+        var exists = false
+        if(TITEMSASSETS.containsKey(asset)){
+            if (TITEMSASSETS.getValue(asset) == item){              //asset - key in Map
+                exists = true
             }
-        })
-
+        }
+        return exists
     }
 
     private fun getItemsComponents(){
@@ -176,6 +221,5 @@ class AddToolFragment : Fragment() {
                 Log.i("TOOL", "items: ${componentsFinal.toString()}")
             }
         })
-
     }
 }

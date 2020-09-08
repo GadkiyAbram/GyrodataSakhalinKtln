@@ -212,6 +212,7 @@ class AddJobFragment : Fragment() {
                     "Job ${jobNumber} added",
                     Toast.LENGTH_SHORT
                 ).show()
+                JNUMBERS.add(jobNumber)
             })
         }else{
             var errorBuilder = StringBuffer()
@@ -234,6 +235,10 @@ class AddJobFragment : Fragment() {
         errorsJobArray = mutableMapOf<String, String>()
 
         val jobValidation = JobValidation()
+
+        if (edJobJobNumber.text.length == 0){
+            errorsJobArray["JobNumber"] = "Empty Job Number"
+        }
 
         if(checkJobExists(edJobJobNumber.text.toString())){
             errorsJobArray["Exists"] = "Job already in DB"

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gyrodatasakhalin.API_KEY
 import com.example.gyrodatasakhalin.R
 import com.example.gyrodatasakhalin.RetrofitInstance
+import com.example.gyrodatasakhalin.TITEMSASSETS
 import com.example.gyrodatasakhalin.tool.Tool
 import com.example.gyrodatasakhalin.tool.ToolAdapter
 import com.example.gyrodatasakhalin.tool.ToolItem
@@ -107,6 +108,7 @@ class ToolFragment : Fragment() {
         responseLiveData.observe(this, Observer {
             val toolList = it.body()?.listIterator()
             var tools = ArrayList<ToolItem>()
+            TITEMSASSETS.clear()
             if (toolList != null){
 
                 if (pbWaiting != null && pbWaiting.isShown){
@@ -116,6 +118,7 @@ class ToolFragment : Fragment() {
                 while (toolList.hasNext()){
                     val toolItem = toolList.next()
                     tools.add(toolItem)
+                    TITEMSASSETS.put(toolItem.asset, toolItem.item)
                 }
                 toolRecyclerView.adapter = ToolAdapter(tools, context!!.applicationContext)
                 (toolRecyclerView.adapter as ToolAdapter).notifyDataSetChanged()
