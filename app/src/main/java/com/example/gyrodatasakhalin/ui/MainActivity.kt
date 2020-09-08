@@ -1,18 +1,17 @@
 package com.example.gyrodatasakhalin.ui
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.appcompat.app.AlertDialog
+import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.ui.NavigationUI
 import com.example.gyrodatasakhalin.R
-import com.example.gyrodatasakhalin.RetrofitInstance
-import com.example.gyrodatasakhalin.auth.AuthService
 import com.example.gyrodatasakhalin.fragments.battery.AddBatteryFragment
 import com.example.gyrodatasakhalin.fragments.battery.BatteryFragment
 import com.example.gyrodatasakhalin.fragments.dashboard.DashboardFragment
@@ -20,12 +19,9 @@ import com.example.gyrodatasakhalin.fragments.job.AddJobFragment
 import com.example.gyrodatasakhalin.fragments.job.JobFragment
 import com.example.gyrodatasakhalin.fragments.tool.AddToolFragment
 import com.example.gyrodatasakhalin.fragments.tool.ToolFragment
-import com.example.gyrodatasakhalin.utils.AppPreferences
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_start.*
 import kotlinx.android.synthetic.main.fab_layout.*
-import androidx.lifecycle.Observer
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val fbAddMain: FloatingActionButton = findViewById(R.id.fbAddMain)
+        val rootView: FrameLayout = findViewById(R.id.main_activity_layout)
+
 
 //        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 //        setupBottomNavMenu(navController)
@@ -90,7 +88,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
     }
 
     private fun makeCurrentFragment(fragment: Fragment) {
@@ -142,12 +139,18 @@ class MainActivity : AppCompatActivity() {
         private fun setVisibility(clicked: Boolean) {
             if (!clicked) {
                 fbAddToolButton.visibility = View.VISIBLE
+                fbAddToolButton.isClickable = true
                 fbAddBatteryButton.visibility = View.VISIBLE
+                fbAddBatteryButton.isClickable = true
                 fbAddJobButton.visibility = View.VISIBLE
+                fbAddJobButton.isClickable = true
             } else {
                 fbAddToolButton.visibility = View.INVISIBLE
+                fbAddToolButton.isClickable = false
                 fbAddBatteryButton.visibility = View.INVISIBLE
+                fbAddBatteryButton.isClickable = false
                 fbAddJobButton.visibility = View.INVISIBLE
+                fbAddJobButton.isClickable = false
             }
         }
     }

@@ -17,10 +17,11 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/colorThemeMain"
+            android:backgroundTint="#FFFFFF"
             android:clickable="true"
             android:focusable="true"
             android:tint="@android:color/white"
+            app:backgroundTint="#FAFAFA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add" />
@@ -36,7 +37,8 @@
             android:focusable="true"
             android:tint="@android:color/white"
             android:visibility="invisible"
-            android:backgroundTint="@color/textColorBoxNumber"
+            android:backgroundTint="@color/client"
+            app:backgroundTint="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/fbAddMain"
             app:layout_constraintEnd_toEndOf="@+id/fbAddMain"
             app:srcCompat="@drawable/ic_job" />
@@ -52,7 +54,8 @@
             android:focusable="true"
             android:tint="@android:color/white"
             android:visibility="invisible"
-            android:backgroundTint="@color/textColorBoxNumber"
+            android:backgroundTint="@color/client"
+            app:backgroundTint="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/fbAddJobButton"
             app:layout_constraintEnd_toEndOf="@+id/fbAddJobButton"
             app:srcCompat="@drawable/ic_battery" />
@@ -68,7 +71,8 @@
             android:focusable="true"
             android:tint="@android:color/white"
             android:visibility="invisible"
-            android:backgroundTint="@color/textColorBoxNumber"
+            android:backgroundTint="@color/client"
+            app:backgroundTint="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/fbAddBatteryButton"
             app:layout_constraintEnd_toEndOf="@+id/fbAddBatteryButton"
             app:srcCompat="@drawable/ic_tool" />

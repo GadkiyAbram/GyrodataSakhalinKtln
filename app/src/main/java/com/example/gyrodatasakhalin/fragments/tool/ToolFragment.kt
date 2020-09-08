@@ -94,8 +94,10 @@ class ToolFragment : Fragment() {
 
     private fun getTools(token: String, what: String, where: String){
 
-        pbWaiting.bringToFront()
-        pbWaiting.visibility = View.VISIBLE
+        if (pbWaiting != null){
+            pbWaiting.bringToFront()
+            pbWaiting.visibility = View.VISIBLE
+        }
 
         val responseLiveData : LiveData<Response<Tool>> = liveData {
             val response = toolService.getCustomItems(what, where)

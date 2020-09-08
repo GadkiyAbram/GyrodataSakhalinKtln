@@ -37,7 +37,8 @@
             android:indeterminate="true"
             android:layout_gravity="top"
             android:layout_centerHorizontal="true"
-            android:minWidth="300dp" />
+            android:minWidth="300dp"
+            android:background="#FFFFFF" />
 
     </LinearLayout>
 
