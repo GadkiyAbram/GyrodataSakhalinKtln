@@ -252,7 +252,7 @@ class AddJobFragment : Fragment() {
             errorsJobArray["ModemVersion"] = "Invalid Modem Version"
         }
 
-        if(!jobValidation.checkMaxTemp(edJobMaxTemp.text.toString())){
+        if(!(convertMaxTemp(edJobMaxTemp.text.toString()) is Float)){
             errorsJobArray["MaxTemp"] = "Invalid Max Temperature"
         }
 
@@ -285,5 +285,15 @@ class AddJobFragment : Fragment() {
             e.printStackTrace()
         }
         return circulationConverted
+    }
+
+    fun convertMaxTemp(maxTemp: String): Float{
+        var maxTempConverted: Float = 0F
+        try {
+            maxTempConverted = maxTemp.toFloat()
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+        return maxTempConverted
     }
 }
