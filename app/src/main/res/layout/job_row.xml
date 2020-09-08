@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="GDP / Modem:"
                     android:textStyle="bold"
                     android:textSize="16dp"
@@ -33,6 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvTool"
                     android:text="G0079H"
                     android:textSize="16dp"
@@ -41,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvModem"
                     android:text="G0009"
                     android:textSize="16dp"
@@ -58,6 +61,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Bullplug:"
                     android:textStyle="bold"
                     android:textSize="16dp"
@@ -65,6 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvBbp"
                     android:text="S1-0163-0001"
                     android:textSize="16dp"
@@ -74,6 +79,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Modem Version:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -81,6 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvModemVersion"
                     android:text="4r13"
                     android:textSize="16dp"
@@ -98,6 +105,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Circ Hours:"
                     android:textStyle="bold"
                     android:textSize="16dp"
@@ -105,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvCircHrs"
                     android:text="40"
                     android:textSize="16dp"
@@ -114,6 +123,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Max Temp:"
                     android:textStyle="bold"
                     android:textSize="16dp"
@@ -121,6 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvMaxTmp"
                     android:text="40"
                     android:textSize="16dp"
@@ -138,6 +149,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Battery:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -145,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvBattery"
                     android:text="S1-0331-0001"
                     android:textSize="16dp"
@@ -171,6 +184,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Engineers:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -178,8 +192,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvSurvEng1"
-                    android:text="Aleksandr Abramoskii"
+                    android:text="Aleksandr Abramovskii"
                     android:textSize="16dp"
                     android:layout_weight="4"
                     android:textAlignment="center"
@@ -187,6 +202,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvSurvEng2"
                     android:text="Dmitrii Ivanov"
                     android:textSize="16dp"
@@ -203,6 +219,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Eng1 arr/lft:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -210,6 +227,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvEng1Arr"
                     android:text="25/02/2017"
                     android:textSize="16dp"
@@ -218,6 +236,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="-"
                     android:textSize="16dp"
                     android:layout_weight="1"
@@ -225,6 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvEng1Lft"
                     android:text="04/04/2017"
                     android:textSize="16dp"
@@ -241,6 +261,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Eng2 arr/lft:"
                     android:textSize="16dp"
                     android:layout_weight="2"
@@ -248,6 +269,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvEng2Arr"
                     android:text="30/03/2017"
                     android:textSize="16dp"
@@ -256,6 +278,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="-"
                     android:textSize="16dp"
                     android:layout_weight="1"
@@ -263,6 +286,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvEng2Lft"
                     android:text="04/04/2017"
                     android:textSize="16dp"
@@ -279,6 +303,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Container:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -286,6 +311,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvContainer"
                     android:text="AMD-033S"
                     android:textSize="16dp"
@@ -302,6 +328,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Container arr/lft:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -309,6 +336,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvContainerArr"
                     android:text="17/01/2017"
                     android:textSize="16dp"
@@ -317,6 +345,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="-"
                     android:textSize="16dp"
                     android:layout_weight="1"
@@ -324,6 +353,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvContainerLft"
                     android:text="15/04/2017"
                     android:textSize="16dp"
@@ -350,6 +380,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Comments:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -357,6 +388,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:text="Issues:"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -364,6 +396,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvIssues"
                     android:text="No"
                     android:textSize="16dp"
@@ -380,6 +413,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:textColor="@color/colorSimpleBlack"
                     android:id="@+id/tvComments"
                     android:text="DI arrived 30/03 to change GB"
                     android:textSize="16dp"
