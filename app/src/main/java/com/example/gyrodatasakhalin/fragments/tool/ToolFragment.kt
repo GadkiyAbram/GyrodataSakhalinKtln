@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
@@ -31,6 +32,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 private lateinit var toolService: ToolService
+private lateinit var progressBar: ProgressBar
 
 class ToolFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -50,7 +52,12 @@ class ToolFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tool, container, false)
+
+        val toolView: View = inflater.inflate(R.layout.fragment_tool, container, false)
+        progressBar = toolView.findViewById(R.id.pbWaiting)
+
+        return toolView
+//        return inflater.inflate(R.layout.fragment_tool, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,9 +102,14 @@ class ToolFragment : Fragment() {
 
     private fun getTools(token: String, what: String, where: String){
 
-        if (pbWaiting != null){
-            pbWaiting.bringToFront()
-            pbWaiting.visibility = View.VISIBLE
+//        if (pbWaiting != null){
+//            pbWaiting.bringToFront()
+//            pbWaiting.visibility = View.VISIBLE
+//        }
+
+        if (progressBar != null){
+            progressBar.bringToFront()
+            progressBar.visibility = View.VISIBLE
         }
 
         val responseLiveData : LiveData<Response<Tool>> = liveData {

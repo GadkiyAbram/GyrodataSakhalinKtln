@@ -7,6 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -39,7 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         val fbAddMain: FloatingActionButton = findViewById(R.id.fbAddMain)
         val rootView: FrameLayout = findViewById(R.id.main_activity_layout)
-
 
 //        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 //        setupBottomNavMenu(navController)

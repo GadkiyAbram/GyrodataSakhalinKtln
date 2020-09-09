@@ -252,6 +252,10 @@ class AddJobFragment : Fragment() {
             errorsJobArray["Battery"] = "Battery shouldn't be empty"
         }
 
+        if (spinnerEngOne.selectedItem == spinnerEngTwo.selectedItem){
+            errorsJobArray["Engineer"] = "Engineers should be different"
+        }
+
         if(!jobValidation.checkModemVersion(edJobModemVer.text.toString())){
             errorsJobArray["ModemVersion"] = "Invalid Modem Version"
         }

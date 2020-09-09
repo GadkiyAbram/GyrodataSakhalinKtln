@@ -9,11 +9,11 @@
         android:icon="@drawable/ic_tools"
         android:title="Tools" />
     <item
-        android:id="@+id/destination_job"
-        android:icon="@drawable/ic_jobs"
-        android:title="Jobs" />
-    <item
         android:id="@+id/destination_battery"
         android:icon="@drawable/ic_batteries"
         android:title="Batteries" />
+    <item
+        android:id="@+id/destination_job"
+        android:icon="@drawable/ic_jobs"
+        android:title="Jobs" />
 </menu>
