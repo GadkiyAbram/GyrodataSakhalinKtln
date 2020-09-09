@@ -30,7 +30,6 @@ class AddJobFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -99,7 +98,9 @@ class AddJobFragment : Fragment() {
                 Log.i("JOB", "BBPs: ${bbps.toString()}")
                 engs = jobData.get(4)
                 spinnerEngOne.adapter = ArrayAdapter<String>(context!!.applicationContext, R.layout.spinner_items, engs)
+                spinnerEngOne.setSelection(engs.size - 1)
                 spinnerEngTwo.adapter = ArrayAdapter<String>(context!!.applicationContext, R.layout.spinner_items, engs)
+                spinnerEngTwo.setSelection(engs.size - 1)
                 Log.i("JOB", "Batteries: ${engs.toString()}")
                 batteries = jobData.get(5)
                 spinnerBattery.adapter = ArrayAdapter<String>(context!!.applicationContext, R.layout.spinner_items, batteries)
@@ -109,111 +110,93 @@ class AddJobFragment : Fragment() {
     }
 
     private fun addJob(){
-        val id = 0
-        val jobNumber = edJobJobNumber.text.toString()
-        val clientName = spinnerClient.selectedItem.toString()
-        val gdp = spinnerGDP.selectedItem.toString()
-        val modem = spinnerModem.selectedItem.toString()
-        val bbp = spinnerBullplug.selectedItem.toString()
-        val battery = spinnerBattery.selectedItem.toString()
-        val circulation = convertCirculation(edJobCirculation.text.toString())
-        val oldCirculation = 0
-        val modemVer = edJobModemVer.text.toString()
-        val maxTemp = edJobMaxTemp.text.toString()
-        val engOne = spinnerEngOne.selectedItem.toString()
-        val engTwo = spinnerEngTwo.selectedItem.toString()
-        val engOneArr = edJobEngOneArrived.text.toString()
-        val engTwoArr = edJobEngTwoArrived.text.toString()
-        val engOneLeft = edJobEngOneLeft.text.toString()
-        val engTwoLeft = edJobEngTwoLeft.text.toString()
-        val container = edJobContainer.text.toString()
-        val containerArr = edJobContArrived.text.toString()
-        val containerLeft = edJobContLeft.text.toString()
-        val rig = edJobRig.text.toString()
-
-//        TODO() - refactor this
-        val issues = "No"
-        val comment = edJobComments.text.toString()
-        val created = ""
-        val updated = ""
-        val expandable = false
-
-        val job = JobItem(battery,
-            bbp,
-            circulation,
-            clientName,
-            comment,
-            container,
-            containerArr,
-            containerLeft,
-            created,
-            engOneArr,
-            engOneLeft,
-            engTwoArr,
-            engTwoLeft,
-            engOne,
-            engTwo,
-            gdp,id,
-            issues,
-            jobNumber,
-            maxTemp,
-            modem,
-            modemVer,
-            oldCirculation,
-            rig,
-            updated,
-            expandable)
-
-        Log.i("JOB", "Job created: ${job}")
-
-//        val responseLiveData : LiveData<Response<Int>> = liveData {
-//            val response = jobService.addNewJob(job)
-//            emit(response)
-//        }
-//        responseLiveData.observe(this@AddJobFragment, Observer {
-//            val result = it.body()
-//            if (result != null) {
-//                if (pbWaiting != null && pbWaiting.isShown) {
-//                    pbWaiting.visibility = View.GONE
-////                    clearEditTextViews()
-//                }
-//            }
-//            Log.i("JOB", "Job Number: ${jobNumber} && ${result}")
-//            if (pbWaiting != null && pbWaiting.isShown) {
-//                pbWaiting.visibility = View.GONE
-//            }
-//            Toast.makeText(
-//                context!!.applicationContext,
-//                "Job ${jobNumber} added",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//            getInitialJobData()     // refresh the initial job data
-//        })
 
         if(validateJob()){
-            val responseLiveData : LiveData<Response<Int>> = liveData {
-                val response = jobService.addNewJob(job)
-                emit(response)
-            }
-            responseLiveData.observe(this@AddJobFragment, Observer {
-                val result = it.body()
-                if (result != null) {
+
+            val id = 0
+            val jobNumber = edJobJobNumber.text.toString()
+            val clientName = spinnerClient.selectedItem.toString()
+            val gdp = spinnerGDP.selectedItem.toString()
+            val modem = spinnerModem.selectedItem.toString()
+            val bbp = spinnerBullplug.selectedItem.toString()
+            val battery = spinnerBattery.selectedItem.toString()
+            val circulation = convertCirculation(edJobCirculation.text.toString())
+            val oldCirculation = 0
+            val modemVer = edJobModemVer.text.toString()
+            val maxTemp = edJobMaxTemp.text.toString()
+            val engOne = spinnerEngOne.selectedItem.toString()
+            val engTwo = spinnerEngTwo.selectedItem.toString()
+            val engOneArr = edJobEngOneArrived.text.toString()
+            val engTwoArr = edJobEngTwoArrived.text.toString()
+            val engOneLeft = edJobEngOneLeft.text.toString()
+            val engTwoLeft = edJobEngTwoLeft.text.toString()
+            val container = edJobContainer.text.toString()
+            val containerArr = edJobContArrived.text.toString()
+            val containerLeft = edJobContLeft.text.toString()
+            val rig = edJobRig.text.toString()
+
+//        TODO() - refactor this
+            val issues = "No"
+            val comment = edJobComments.text.toString()
+            val created = ""
+            val updated = ""
+            val expandable = false
+
+            val job = JobItem(battery,
+                bbp,
+                circulation,
+                clientName,
+                comment,
+                container,
+                containerArr,
+                containerLeft,
+                created,
+                engOneArr,
+                engOneLeft,
+                engTwoArr,
+                engTwoLeft,
+                engOne,
+                engTwo,
+                gdp,id,
+                issues,
+                jobNumber,
+                maxTemp,
+                modem,
+                modemVer,
+                oldCirculation,
+                rig,
+                updated,
+                expandable)
+
+            Log.i("JOB", "Job created: ${job}")
+
+            try {
+                val responseLiveData : LiveData<Response<Int>> = liveData {
+                    val response = jobService.addNewJob(job)
+                    emit(response)
+                }
+                responseLiveData.observe(this@AddJobFragment, Observer {
+                    val result = it.body()
+                    if (result != null) {
+                        if (pbWaiting != null && pbWaiting.isShown) {
+                            pbWaiting.visibility = View.GONE
+//                    clearEditTextViews()
+                        }
+                    }
+                    Log.i("RESULT", "Job Number 1: ${jobNumber} && ${result}")
                     if (pbWaiting != null && pbWaiting.isShown) {
                         pbWaiting.visibility = View.GONE
-//                    clearEditTextViews()
                     }
-                }
-                Log.i("RESULT", "Job Number 1: ${jobNumber} && ${result}")
-                if (pbWaiting != null && pbWaiting.isShown) {
-                    pbWaiting.visibility = View.GONE
-                }
-                Toast.makeText(
-                    context!!.applicationContext,
-                    "Job ${jobNumber} added",
-                    Toast.LENGTH_SHORT
-                ).show()
-                JNUMBERS.add(jobNumber)
-            })
+                    Toast.makeText(
+                        context!!.applicationContext,
+                        "Job ${jobNumber} added",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    JNUMBERS.add(jobNumber)
+                })
+            }catch (e: Exception){
+                Log.e("Error", "${e.toString()}")
+            }
         }else{
             var errorBuilder = StringBuffer()
 
@@ -230,6 +213,7 @@ class AddJobFragment : Fragment() {
     }
 
     private fun validateJob(): Boolean{
+
         var granted = true
 
         errorsJobArray = mutableMapOf<String, String>()
@@ -246,6 +230,26 @@ class AddJobFragment : Fragment() {
 
         if (!jobValidation.checkJobNumber(edJobJobNumber.text.toString())){
             errorsJobArray["JobNumber"] = "Invalid Job Number"
+        }
+        // Check spinners should not be null
+        if (spinnerClient.selectedItem == null){
+            errorsJobArray["Client"] = "Client shouldn't be empty"
+        }
+
+        if (spinnerGDP.selectedItem == null){
+            errorsJobArray["GDP"] = "Item shouldn't be empty"
+        }
+
+        if (spinnerModem.selectedItem == null){
+            errorsJobArray["Modem"] = "Modem shouldn't be empty"
+        }
+
+        if (spinnerBullplug.selectedItem == null){
+            errorsJobArray["Bullplug"] = "Bullplug shouldn't be empty"
+        }
+
+        if (spinnerBattery.selectedItem == null){
+            errorsJobArray["Battery"] = "Battery shouldn't be empty"
         }
 
         if(!jobValidation.checkModemVersion(edJobModemVer.text.toString())){

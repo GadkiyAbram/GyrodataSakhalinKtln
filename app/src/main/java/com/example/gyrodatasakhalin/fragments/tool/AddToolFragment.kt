@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_add_tool.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
+import java.lang.Exception
 import java.util.*
 
 
@@ -130,23 +131,28 @@ class AddToolFragment : Fragment() {
         )
 
         if (validateItem(gwdItem, gwdAsset)){
-            val responseLiveData : LiveData<Response<Int>> = liveData {
-                val response = toolService.addNewItem(gwdItemToInsert)
-                emit(response)
+            try {
+                val responseLiveData : LiveData<Response<Int>> = liveData {
+                    val response = toolService.addNewItem(gwdItemToInsert)
+                    emit(response)
+                }
+
+                responseLiveData.observe(this, Observer {
+                    val result = it.body()
+                    if (result != null){
+
+                        if (pbWaiting != null && pbWaiting.isShown){
+                            pbWaiting.visibility = View.GONE
+                        }
+
+                        Toast.makeText(context!!.applicationContext, "${gwdItem} ${gwdAsset} added", Toast.LENGTH_SHORT).show()
+                        TITEMSASSETS.put(gwdAsset, gwdItem)
+                    }
+                })
+            }catch (e: Exception){
+                Log.e("Error", "${e.toString()}")
             }
 
-            responseLiveData.observe(this, Observer {
-                val result = it.body()
-                if (result != null){
-
-                    if (pbWaiting != null && pbWaiting.isShown){
-                        pbWaiting.visibility = View.GONE
-                    }
-
-                    Toast.makeText(context!!.applicationContext, "${gwdItem} ${gwdAsset} added", Toast.LENGTH_SHORT).show()
-                    TITEMSASSETS.put(gwdAsset, gwdItem)
-                }
-            })
         }else{
             var errorBuilder = StringBuffer()
 

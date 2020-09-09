@@ -134,12 +134,13 @@ class DashboardFragment : Fragment() {
                 while (jobList.hasNext()){
                     val jobItem = jobList.next()
                     jobs.add(jobItem.updatedAt)
-                    val updatedJobList = jobs.get(jobs.size - 1)
-                    val jobsTotal = jobs.size.toString()
-                    if(updatedJobList != null && jobsTotal != null){
-                        jobs_updated.text = updatedJobList
-                        jobs_total.text = jobsTotal
-                    }
+                    JNUMBERS.add(jobItem.jobNumber)
+                }
+                val updatedJobList = jobs.get(jobs.size - 1)
+                val jobsTotal = jobs.size.toString()
+                if(updatedJobList != null && jobsTotal != null){
+                    jobs_updated.text = updatedJobList
+                    jobs_total.text = jobsTotal
                 }
             }
         })

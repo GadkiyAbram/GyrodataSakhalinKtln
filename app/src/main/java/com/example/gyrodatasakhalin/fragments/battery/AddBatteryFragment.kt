@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_add_battery.*
 import kotlinx.android.synthetic.main.battery_condition_switch.*
 import kotlinx.android.synthetic.main.progress_bar.*
 import retrofit2.Response
+import java.lang.Exception
 
 private lateinit var retService: BatteryService
 private lateinit var errorsBatteryArray: MutableMap<String, String>
@@ -82,24 +83,30 @@ class AddBatteryFragment : Fragment() {
             pbWaiting.bringToFront()
             pbWaiting.visibility = View.VISIBLE
 
-            val responseLiveData : LiveData<Response<Int>> = liveData {
-                val response = retService.addBattery(battery)
-                emit(response)
-            }
-            responseLiveData.observe(this@AddBatteryFragment, Observer {
-                val result = it.body()
-                if(result != null){
+            try {
+                val responseLiveData : LiveData<Response<Int>> = liveData {
+                    val response = retService.addBattery(battery)
+                    emit(response)
+                }
+                responseLiveData.observe(this@AddBatteryFragment, Observer {
+                    val result = it.body()
+                    if(result != null){
+                        if (pbWaiting != null && pbWaiting.isShown){
+                            pbWaiting.visibility = View.GONE
+                            clearEditTextViews()
+                        }
+                    }
+                    Log.i("RESULT", "Serial 1: ${serialOne}")
                     if (pbWaiting != null && pbWaiting.isShown){
                         pbWaiting.visibility = View.GONE
-                        clearEditTextViews()
                     }
-                }
-                Log.i("RESULT", "Serial 1: ${serialOne}")
-                if (pbWaiting != null && pbWaiting.isShown){
-                    pbWaiting.visibility = View.GONE
-                }
-                Toast.makeText(context!!.applicationContext, "Battery ${serialOne} added", Toast.LENGTH_SHORT).show()
-            })
+                    Toast.makeText(context!!.applicationContext, "Battery ${serialOne} added", Toast.LENGTH_SHORT).show()
+                })
+            }catch (e: Exception){
+                Log.e("Error", "${e.toString()}")
+            }
+
+
         }else{
             var errorBuilder = StringBuffer()
 
