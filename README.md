@@ -44,4 +44,21 @@ The Item data consists of:
    - Manufactured Date
    - Location (If one is in Storage Base or outsidde, e.g. on the Rig, assigned for the Job)
    - Comment if needed
+   
+ JOBS screen displays the Job Items in DB. The record in RecyclerView can be expanded to see full details.
+ The Job data consists of:
+  - Job Number. This parameter is neccesary, should be unique
+  - Client. Indicated in Circle and shortened name attached.
+  - Tool (GDP, Gyro / Power / Data) - asset number
+  - Modem - asset number
+  - Battery Bullplug - asset number
+  - Battery - serial number
+  - Circulation Hours - this could be 0 if the Job is not done yet. Otherwise, it should be entered, as this value is used for calculating the Tools circulation hours (for GDP / Modem / BBP) - max 500 hrs prior to Maintanence
+  - Engineers names, assigned to the Job
+  - Dates of Engineers arrivals / leaving the Rig
+  - Container Asset
+  - Dates of Container arrival / leaving the Rig
+  - Max Temp in the Well being drilled
+  - Issues (yes / no). If "Yes" - put in Comment short description
+  - Comment - if neccesary
 
