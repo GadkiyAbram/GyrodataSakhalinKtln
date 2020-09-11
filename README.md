@@ -10,7 +10,7 @@ Now this app redone on Kotlin with Coroutines and Retrofit2 library to fetch the
 The purpose of this app is to connect to Gyrodata API and receive Items / Batteries / Jobs data from DB, running on MSSQL Server on Azure.
 
 Usage:
-1. To use the app you will need to ask Admin to grant the access to service.
+1.1. To use the app you will need to ask Admin to grant the access to service.
 This should be done using the link below:
 http://demolaravel.azurewebsites.net - go to "Send Request" and fill First / Last Names & Email. Admin will check information and grant the access, give you a password and set your Role (Admin / User)
 If you're Admin - you will be able to manage User's data, e.g. grant users's access.
@@ -61,4 +61,27 @@ The Item data consists of:
   - Max Temp in the Well being drilled
   - Issues (yes / no). If "Yes" - put in Comment short description
   - Comment - if neccesary
+  
+The right bottom Floating Button will show three buttons: Add Item / Battery / Job
+Prior the Job creating (final step) you will need to insert Items and Batteries.
+
+INSERTING ITEMS.
+In mobile App there is no need to instert ALL the information, as it will be easier to correct one via desktop / web versions of the Service.
+The TWO parameters you will need to insert: Type of Item and Asset number. The app will check then if there is no duplicate values.
+For creating the Job you will need to have the following Items: GDP Sections / GWD Modem / GWD Bullplug
+Below you can attach picture if applicable
+
+INSERTING BATTERIES.
+As well as Items, there is no need to insert ALL the information.
+You just need to insert Serial One number of the NEW battery, as for Job creating there should be only NEW batteries.
+
+INSERTING JOB.
+If you have you Items and Batteries inserted, it will be populated in the spinners of Job creating form:
+The App will call the API with "Initial Job Data", that consists of:
+  - GDP Sections
+  - GWD Modem
+  - GWD Bullplug
+  - Battery
+  - Engineer1 & 2 - this values comes from API and hardrecoded in DB
+  - Client - the same as for Engineers
 
