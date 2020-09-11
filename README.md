@@ -14,5 +14,25 @@ Usage:
 This should be done using the link below:
 http://demolaravel.azurewebsites.net - go to "Send Request" and fill First / Last Names & Email. Admin will check information and grant the access, give you a password and set your Role (Admin / User)
 If you're Admin - you will be able to manage User's data, e.g. grant users's access.
-If you're User - you will only be able to manage Items / Batteries / Jobs data, e.g. Insert / Update. 
+If you're User - you will only be able to manage Items / Batteries / Jobs data, e.g. Insert / Update.
+
+Enter your credentials and API service will send you a token (valid 24 hrs) to use the API Service.
+
+2. What can be done with App once you receive the credentials.
+Dashboard screen will show 
+  - BATTERIES data in DB (Batteries table last updated and Total Batteries in Table)
+  - JOB LOGS data in DB (Jobs table last updated and Total Jobs in Table)
+  - TOOLS data in DB (Items table last updated and Total Items in Table)
+  
+TOOLS screen diplays the Equipment Items in DB. The record in RecyclerView can be expanded to see full details and Picture attached.
+The data consists of: 
+  - Item Name (e.g. GDP Sections, Modem etc.)
+  - Item arrived in Country (Russia in current case)
+  - Item Asset number
+  - Item Circulation hours, the important value for some Items, that should be calculated carefully. The PM (Periodical Maintanence) for Item is after 500 Hrs.
+    Thus, if the Tool reaches 400 hrs, the text will be switched to RED (kind of warning)
+  - Item CCD & Invoice
+  - Item Position in CCD
+  - Comments
+  - etc.
 
