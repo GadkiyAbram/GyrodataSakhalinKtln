@@ -85,3 +85,4 @@ The App will call the API with "Initial Job Data", that consists of:
   - Engineer1 & 2 - this values comes from API and hardrecoded in DB
   - Client - the same as for Engineers
 
+After the Job has been created, the circulation hours will be shown in Tools screen and will be taken into account while calculating the Total Item Circulation Hours
